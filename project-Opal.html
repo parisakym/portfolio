@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <title>Opal lacks of flexibility — Parisa Khayami</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    html, body{background:#040404; color:#fff;}
+    .header-row{background:#040404;}
+    .site-header:not(.is-scrolled) .header-row{box-shadow:0 8px 20px -6px rgba(220,220,220,.18);}
+    .site-header.is-scrolled .header-row{background:rgba(4,4,4,.6); border:1px solid rgba(255,255,255,.25);}
+    .nav-link{color:#fff;}
+    .nav-link.active{color:var(--accent);}
+    .hamburger span{background:#fff;}
+    .cs-tags-row span{background:rgba(22,22,22,0.7); color:#fff;}
+    .cs-hero-sub{color:rgba(255,255,255,.65);}
+    .cs-role p{color:rgba(255,255,255,.75);}
+    .cs-back{color:rgba(255,255,255,.55);}
+    .cs-back:hover{color:var(--accent);}
+    .cs-toc a{color:rgba(255,255,255,.45);}
+    .cs-toc a:hover{color:rgba(255,255,255,.85);}
+    .cs-toc a .cs-toc-num{color:rgba(255,255,255,.3);}
+    .cs-toc a:hover .cs-toc-num{color:rgba(255,255,255,.6);}
+    @media (max-width:900px){
+      .cs-toc{display:none;}
+    }
+
+    .cs-overview-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;}
+    .cs-phone-mock{
+      aspect-ratio:9/16; margin:0 auto; border-radius:28px;
+      display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+      color:rgba(255,255,255,.4); font-size:13px; line-height:1.5; overflow:hidden;
+    }
+    .cs-phone-mock video{width:100%; height:100%; object-fit:cover; border-radius:27px; display:block;}
+    .cs-overview-text .cs-hero-title{max-width:none;}
+    .cs-hero-logo{width:220px; height:auto; display:block;}
+    .cs-problem-card{border-radius:28px; padding:24px 16px; text-align:center;}
+    #system .cs-problem-card{background:none;}
+    #struggle .cs-problem-card{background:none;}
+    #persona .cs-problem-card{
+      border-radius:28px;
+    }
+    #struggle .cs-problem-heading{background:linear-gradient(to right, #7B7FE0, #C9B968); background-clip:text; color:transparent; -webkit-text-fill-color:transparent;}
+    #problem .cs-problem-card{background:rgba(22,22,22,0.7); border:1px solid rgba(201,201,201,0.15);}
+    #journey-map .cs-problem-heading{background:linear-gradient(to right, #9dd310 0.42%, #aa22d6); background-clip:text; color:transparent; -webkit-text-fill-color:transparent;}
+    #persona .cs-problem-heading{background:linear-gradient(to right, #B7F861, #FB7371); background-clip:text; color:transparent; -webkit-text-fill-color:transparent;}
+    .cs-struggle-row{display:flex; flex-direction:column; gap:24px; text-align:left; margin-top:24px;}
+    .cs-struggle-row .cs-problem-body{margin:0; text-align:left; flex:1;}
+    .cs-struggle-img{width:80%; height:auto; border-radius:16px; display:block; margin:0 auto;}
+    .cs-insight-cards{display:flex; flex-direction:column; gap:16px; margin-top:32px; text-align:left;}
+    .cs-insight-card{
+      background:rgba(22,22,22,0.7); border-radius:16px; padding:28px 32px;
+      border:1px solid rgba(201,201,201,0.15);
+    }
+    .cs-impact-img{width:100%; height:auto; border-radius:16px; margin-top:32px; display:block;}
+
+    .cs-journey-svg{width:100%; height:auto; display:block; margin-top:32px; border-radius:20px; border:1px solid rgba(201,201,201,0.15);}
+    .cs-competitor-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;}
+    .cs-testinfo-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;}
+    .cs-testinfo-grid img{height:480px; object-fit:cover; display:block; padding:20px 0px;}
+    @media (max-width:900px){
+      .cs-testinfo-grid{grid-template-columns:1fr; width:100%; text-align:center;}
+      .cs-testinfo-grid img{padding:0;}
+      .cs-testinfo-grid img:first-child{height:auto; width:auto; max-width:280px; margin:0 auto 16px;}
+      .cs-testinfo-grid img:last-child{height:auto; width:100%; max-width:none; margin:0;}
+    }
+    .cs-competitor-grid img{width:100%; height:auto; display:block; border-radius:16px; border:1px solid rgba(201,201,201,0.15);}
+    .cs-iteration-svg{width:100%; height:auto; display:block; margin-top:32px;}
+
+    .cs-feature-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;}
+    .cs-feature-card:nth-child(5){grid-column:1 / -1;}
+    .cs-feature-card{
+      position:relative; display:flex; align-items:flex-start; gap:16px;
+      background:#0a0a0a; border:1px solid rgba(201,201,201,0.2); border-radius:12px;
+      padding:22px 60px 22px 22px; min-height:120px;
+    }
+    .cs-feature-card, .cs-feature-card *{text-align:left;}
+    .cs-feature-num{font-family:var(--font-display); font-size:38px; color:#fff; line-height:1; flex-shrink:0;}
+    .cs-feature-body h4{font-family:var(--font-display); font-weight:700; font-size:16px; color:#E99673; margin:0 0 8px;}
+    .cs-feature-body p{color:rgba(255,255,255,.65); font-size:13px; line-height:1.55; margin:0; padding-bottom:20px;}
+    #reflection .cs-feature-card{padding:22px;}
+    #reflection .cs-feature-body h4{color:#fff;}
+    #reflection .cs-feature-body p{font-size:16px;}
+    #reflection .cs-feature-num{font-family:var(--font-sans); font-size:54px;}
+    #reflection .cs-feature-grid{grid-template-columns:1fr;}
+    #reflection .cs-feature-body p{padding-bottom:0;}
+    #reflection .cs-feature-body h4{margin:0 0 20px;}
+    #reflection .cs-feature-num{padding-top:12px; line-height:normal;}
+    .cs-feature-tags{position:absolute; right:14px; bottom:14px; display:flex; gap:6px;}
+    .cs-feature-tag{background:#B6CECA; color:#161616; font-size:11px; font-weight:700; padding:4px 10px; border-radius:3px;}
+    .cs-feature-tag.sima{background:#A193AA; color:#161616;}
+    @media (max-width:760px){.cs-feature-grid{grid-template-columns:1fr;}}
+    @media (max-width:760px){.cs-competitor-grid{grid-template-columns:1fr;}}
+
+    .cs-iteration-cards{display:flex; flex-direction:column; gap:24px; margin-top:32px; text-align:left;}
+    .cs-iteration-card{background:rgba(15,15,17,0.8); border:1px solid rgba(255,255,255,0.5); border-radius:20px; padding:32px;}
+    .cs-iteration-card h4{color:#fff; font-family:var(--font-display); font-weight:700; font-size:20px; margin:0 0 8px;}
+    .cs-iteration-card p{color:#8F8F8F; font-size:14px; line-height:1.6; margin:0 0 24px;}
+    .cs-iteration-compare{display:flex; align-items:center; justify-content:center; gap:24px;}
+    .cs-iteration-shot{aspect-ratio:355/770; max-width:180px; width:100%; flex:0 1 auto;}
+    .cs-iteration-arrow{color:rgba(255,255,255,.7); font-size:24px; flex-shrink:0;}
+    @media (max-width:600px){.cs-iteration-compare{gap:12px;} .cs-iteration-shot{max-width:120px;}}
+    .cs-insight-head{display:flex; align-items:center; gap:14px; margin-bottom:14px;}
+    .cs-insight-icon{width:60px; height:60px; display:block; flex-shrink:0;}
+    .cs-insight-card h3{font-family:var(--font-display); font-weight:700; font-size:22px; margin:0; background:linear-gradient(to right, #F5A897, #D9C3E8); background-clip:text; color:transparent; -webkit-text-fill-color:transparent;}
+
+    .cs-persona-block{margin-top:40px; text-align:left;}
+    .cs-persona-headline{font-family:var(--font-display); font-weight:600; font-size:24px; line-height:1.3; color:rgba(255,255,255,.84); margin:0 0 24px;}
+    .cs-persona-grid{display:grid; grid-template-columns:280px 1fr; gap:20px; align-items:stretch;}
+    .cs-persona-profile{background:rgba(22,22,22,0.7); border-radius:16px; padding:16px; display:flex; flex-direction:column; border:1px solid rgba(201,201,201,0.15);}
+    .cs-persona-quote{color:#fff; font-style:italic; font-size:16px; line-height:1.5; text-align:center; margin:0 0 16px;}
+    .cs-persona-photo{width:100%; aspect-ratio:1/1; border-radius:12px; object-fit:cover; display:block; margin-bottom:16px;}
+    .cs-persona-name{color:#fff; font-family:var(--font-display); font-weight:700; font-size:20px;}
+    .cs-persona-meta{color:rgba(255,255,255,.6); font-size:13.5px; margin-top:4px;}
+    .cs-persona-details{display:flex; flex-direction:column; gap:20px;}
+    .cs-persona-context{background:rgba(22,22,22,0.7); border-radius:16px; padding:16px 16px; color:rgba(255,255,255,.75); font-size:16px; line-height:1.6; flex:1; border:1px solid rgba(201,201,201,0.15);}
+    .cs-persona-two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px; flex:1;}
+    .cs-persona-goals, .cs-persona-pain{background:rgba(22,22,22,0.7); border-radius:16px; padding:16px 16px; border:1px solid rgba(201,201,201,0.15);}
+    .cs-persona-goals h4{color:#D4E157; font-family:var(--font-display); font-weight:700; font-size:19px; margin:0 0 14px;}
+    .cs-persona-pain h4{color:#F4756B; font-family:var(--font-display); font-weight:700; font-size:19px; margin:0 0 14px;}
+    .cs-persona-goals ul, .cs-persona-pain ul{margin:0; padding-left:18px; color:rgba(255,255,255,.8); font-size:14.5px; line-height:1.6;}
+    .cs-persona-goals li, .cs-persona-pain li{margin-bottom:8px;}
+    .cs-persona-goals li:last-child, .cs-persona-pain li:last-child{margin-bottom:0;}
+    @media (max-width:760px){
+      .cs-persona-grid{grid-template-columns:1fr;}
+      .cs-persona-two-col{grid-template-columns:1fr;}
+    }
+    .cs-insight-card p{color:#fff; font-size:16px; line-height:1.6; margin:0;}
+    #system .cs-problem-heading{background:linear-gradient(to right, #F67362, #B693E1); background-clip:text; color:transparent; -webkit-text-fill-color:transparent;}
+    .cs-system-images{display:flex; flex-direction:column; gap:24px; margin-top:32px;}
+    .cs-system-images img{width:100%; height:auto; display:block; border-radius:16px;}
+    .cs-problem-card .ph-list, .cs-problem-card .ph-table, .cs-problem-card .ph-persona-grid,
+    .cs-problem-card .ph-tree, .cs-problem-card .ph-flow, .cs-problem-card .ph-checklist,
+    .cs-problem-card .ph-decision, .cs-problem-card .ph-stats, .cs-problem-card .ph-image-grid,
+    .cs-problem-card .ph-compare, .cs-problem-card .ph-swatches, .cs-problem-card .ph-type-sample,
+    .cs-problem-card .ph-embed{text-align:left;}
+    .cs-problem-badge{display:inline-block; background:#040404; color:#fff; font-weight:700; font-size:19px; padding:14px 32px; border-radius:999px; margin-bottom:28px; border:1px solid rgba(201,201,201,0.15);}
+    .cs-problem-heading{
+      font-family:var(--font-display); font-weight:700; font-size:22px; line-height:1.3; margin:0 auto 24px; max-width:900px;
+      background:linear-gradient(to right, #8AEA26, #42DADF);
+      background-clip:text; color:transparent; -webkit-text-fill-color:transparent;
+    }
+    .cs-problem-body{color:rgba(255,255,255,.75); font-size:18px; line-height:1.7; margin:auto;}
+    @media (max-width:760px){
+      .cs-problem-card{padding:12px 12px;}
+      .cs-problem-badge{font-size:16px; padding:12px 24px;}
+    }
+    @media (max-width:760px){
+      .cs-hero-logo{width:170px; margin:0 auto;}
+      .cs-overview-grid{grid-template-columns:1fr; gap:32px;}
+      .cs-phone-mock{max-width:220px;}
+    }
+    @media (max-width:720px){
+      .cs-content{gap:28px;}
+    }
+    .cs-nav-bottom{border-top-color:rgba(255,255,255,.12);}
+    .cs-more{border-top-color:rgba(255,255,255,.12);}
+    .cs-more-title{color:#fff;}
+    .cs-lightbox-img{background:#363636;}
+  </style>
+</head>
+<body class="cs-page">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <div class="logo"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">Parisa <span class="accent">Khayami</span></div>
+          <div class="brand-sub">UX/UI Designer</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="primaryNavFreshcart">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#home-about" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="btn-resume">Resume</a>
+      </nav>
+
+      <button class="hamburger" id="hamburgerFreshcart" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="cs-main container">
+    <div class="cs-layout">
+      <nav class="cs-toc" aria-label="Case study sections">
+        <a href="#overview"><span class="cs-toc-num">01</span><span>Overview</span></a>
+        <a href="#problem"><span class="cs-toc-num">02</span><span>Problem statement</span></a>
+        <a href="#system"><span class="cs-toc-num">03</span><span>Current System</span></a>
+        <a href="#struggle"><span class="cs-toc-num">04</span><span>Struggle</span></a>
+        <a href="#persona"><span class="cs-toc-num">05</span><span>Persona</span></a>
+        <a href="#journey-map"><span class="cs-toc-num">06</span><span>Journey map</span></a>
+        <a href="#impact"><span class="cs-toc-num">09</span><span>Impact Effort Matrix</span></a>
+        <a href="#competitive"><span class="cs-toc-num">10</span><span>Competitive Analysis</span></a>
+        <a href="#features"><span class="cs-toc-num">11</span><span>Key Features</span></a>
+        <a href="#usability"><span class="cs-toc-num">12</span><span>Usability testing</span></a>
+        <a href="#iteration"><span class="cs-toc-num">13</span><span>Iteration</span></a>
+        <a href="#reflection"><span class="cs-toc-num">14</span><span>Reflection</span></a>
+      </nav>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="overview">
+          <div class="cs-overview-grid">
+            <div class="cs-overview-media">
+              <div class="cs-phone-mock">
+                <video src="video/opal-hero-animation-h264.mp4" autoplay loop muted playsinline></video>
+              </div>
+            </div>
+            <div class="cs-overview-text">
+              <h1 class="cs-hero-title"><img src="img/opal/opal-logo.svg" alt="Opal" class="cs-hero-logo cs-no-lightbox"></h1>
+              <p class="cs-hero-sub">Opal is a focus and screen-time management app that helps users limit distractions through app blocking, scheduling, and usage control tools.</p>
+
+              <div class="cs-tags-row">
+                <span>Mobile App UX</span>
+                <span>UX Research</span>
+                <span>April/ 5 weeks</span>
+                <span>1 Mentor</span>
+                <span>2 person team</span>
+              </div>
+
+              <div class="cs-role">
+                <h3>My Role</h3>
+                <p>UX Designer · 2-person team, mentor-guided, April 2026. I led the end-to-end research process, conducting all 6 interviews, coding 6reviews, and running the heuristic evaluation. Competitive analysis, wireframes, and prototypes were built collaboratively with the team.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="problem">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Problem statement</span>
+            <h2 class="cs-problem-heading">Opal's blocking system lacks flexibility for different needs.</h2>
+            <p class="cs-problem-body">Opal helps users block distractions and manage screen time, but its current blocking system often feels limited and one-size-fits-all. Users may disable restrictions when motivation is low or struggle to find a balance between productivity and necessary digital engagement.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="system">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Current System</span>
+            <h2 class="cs-problem-heading">Opal's current system is built around strict, one-size-fits-all blocking, offering limited flexibility to adapt to different contexts and usage needs.</h2>
+
+            <div class="cs-system-images">
+              <img src="img/opal/current-system-1.svg" alt="Opal's current blocking system, screen 1">
+              <img src="img/opal/current-system-2.svg" alt="Opal's current blocking system, screen 2">
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="struggle">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">What Users Struggle With</span>
+            <h2 class="cs-problem-heading">Users begin motivated, but inflexible systems fail to meet evolving needs, causing frustration and drop-off.</h2>
+            <div class="cs-struggle-row">
+              <p class="cs-problem-body">This section synthesizes insights from 100+ App Store and Google Play reviews, revealing that while users often start with strong motivation, but strict and inflexible systems fail to adapt as their motivation and real-time needs change.When users need quick access for everyday tasks, rigid restrictions become frustrating and impractical. Over time, this lack of flexibility creates tension, leading users to override controls or abandon the system altogether.</p>
+              <img src="img/opal/struggle.svg" alt="Illustration of users struggling with rigid blocking controls" class="cs-struggle-img">
+            </div>
+            <div class="cs-insight-cards">
+              <div class="cs-insight-card">
+                <div class="cs-insight-head">
+                  <img src="img/opal/lock.svg" alt="" class="cs-insight-icon">
+                  <h3>Users Struggle to Follow Rigid Restrictions</h3>
+                </div>
+                <p>Users often start with strong intentions, but struggle to follow strict restrictions when their motivation changes.</p>
+              </div>
+              <div class="cs-insight-card">
+                <div class="cs-insight-head">
+                  <img src="img/opal/settings.svg" alt="" class="cs-insight-icon">
+                  <h3>Users Need Flexibility for Real-Life Situations</h3>
+                </div>
+                <p>Users sometimes need quick access to apps for real-life tasks, making full blocking frustrating and impractical.</p>
+              </div>
+              <div class="cs-insight-card">
+                <div class="cs-insight-head">
+                  <img src="img/opal/puzzle.svg" alt="" class="cs-insight-icon">
+                  <h3>Overly Restrictive Systems Lead to Drop-Off</h3>
+                </div>
+                <p>When the system feels too restrictive or difficult to manage, users tend to override restrictions or stop using the app altogether.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="persona">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">User Persona</span>
+            <h2 class="cs-problem-heading">Consolidating our key insights into 2 goal-oriented personas.</h2>
+
+            <div class="cs-persona-block">
+              <h3 class="cs-persona-headline">Mike needs a system that reduces distractions without requiring effort.</h3>
+              <div class="cs-persona-grid">
+                <div class="cs-persona-profile">
+                  <p class="cs-persona-quote">"I want the system to understand my behavior automatically."</p>
+                  <img src="img/opal/mike.png" alt="Mike" class="cs-persona-photo">
+                  <div class="cs-persona-name">Mike</div>
+                  <div class="cs-persona-meta">Employee. Married, 2 children</div>
+                  <div class="cs-persona-meta">Always-on work culture</div>
+                </div>
+                <div class="cs-persona-details">
+                  <div class="cs-persona-context">Mike works in a fast-paced environment where being constantly available has become part of his daily routine. Over time, checking his phone turned into an automatic response during transitions, stress, and multitasking moments. Although he is aware of the issue, most productivity tools feel overwhelming and require more effort than he is willing to give consistently.</div>
+                  <div class="cs-persona-two-col">
+                    <div class="cs-persona-goals">
+                      <h4>Goals</h4>
+                      <ul>
+                        <li>Stay focused without missing important communication, reduce stress-driven phone use, and feel more in control of attention during work and family time through a passive support system.</li>
+                      </ul>
+                    </div>
+                    <div class="cs-persona-pain">
+                      <h4>Pain Points</h4>
+                      <ul>
+                        <li>Notifications constantly interrupt his attention</li>
+                        <li>Productivity apps require too much setup and maintenance</li>
+                        <li>Work communication makes it difficult to disconnect completely</li>
+                        <li>Awareness alone does not help him change behavior</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-persona-block">
+              <h3 class="cs-persona-headline">Sima needs stronger friction and social accountability.</h3>
+              <div class="cs-persona-grid">
+                <div class="cs-persona-profile">
+                  <p class="cs-persona-quote">"Distraction happens when my brain wants to escape difficult work."</p>
+                  <img src="img/opal/Sima.png" alt="Sima" class="cs-persona-photo">
+                  <div class="cs-persona-name">Sima</div>
+                  <div class="cs-persona-meta">Student · Single · Structured learner</div>
+                  <div class="cs-persona-meta">High self-awareness</div>
+                </div>
+                <div class="cs-persona-details">
+                  <div class="cs-persona-context">Sima is a structured, self-aware student who knows exactly when and why she gets distracted. Unlike emotional scrollers, her trigger is cognitive — difficult tasks push her toward her phone as relief. She relies on Pomodoro timers, study groups, and visual reports to stay accountable and on track.</div>
+                  <div class="cs-persona-two-col">
+                    <div class="cs-persona-goals">
+                      <h4>Goals</h4>
+                      <ul>
+                        <li>Maintain consistent deep focus by reducing stress-driven scrolling, staying aligned with goals during sessions, and visually tracking long-term progress.</li>
+                      </ul>
+                    </div>
+                    <div class="cs-persona-pain">
+                      <h4>Pain Points</h4>
+                      <ul>
+                        <li>Easy bypass completely undermines her system</li>
+                        <li>Self-imposed rules weaker than social commitment</li>
+                        <li>Maintaining discipline is mentally exhausting</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="journey-map">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">User Journey map</span>
+            <h2 class="cs-problem-heading">This map helps uncover where Opal supports users and where it creates friction, pointing to design opportunities around flexibility, motivation, and meaningful progress.</h2>
+
+            <img src="img/opal/journey-map.svg" alt="Journey map: Sima and Mike across adoption, focus, distraction, break time, and advocacy stages" class="cs-journey-svg">
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="impact">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Impact Effort Matrix</span>
+            <h2 class="cs-problem-heading">We prioritized opportunities that offered the greatest value to users while remaining practical to implement.</h2>
+            <p class="cs-problem-body">After generating and discussing a wide range of concepts, we prioritized ideas based on their potential value to users and implementation feasibility. This helped us identify the most promising opportunities to explore further in the design process.</p>
+            <img src="img/opal/Impact.png" alt="Impact effort matrix" class="cs-impact-img">
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="competitive">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Competitive Analysis</span>
+            <h2 class="cs-problem-heading">Users prefer focus experiences that feel flexible and supportive rather than overly restrictive.</h2>
+            <p class="cs-problem-body">To understand how Opal's user experience compares with similar products, we conducted a competitive analysis focused on key features and usability patterns. We examined several focus and screen-time management apps, including Flora, Be Present, Freedom, and Anko, to identify opportunities, strengths, and gaps in relation to Opal.</p>
+
+            <div class="cs-competitor-grid">
+              <img src="img/opal/competitor-anko.png" alt="ANKO competitive analysis">
+              <img src="img/opal/competitor-bepresent.png" alt="Be Present competitive analysis">
+              <img src="img/opal/competitor-flora.png" alt="Flora competitive analysis">
+              <img src="img/opal/competitor-freedom.png" alt="Freedom competitive analysis">
+            </div>
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="features">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Key Features</span>
+            <h2 class="cs-problem-heading">Each feature is tied to a confirmed research failure. Every decision is grounded in real user behavior, not speculation.</h2>
+            <p class="cs-problem-body">This redesign focuses on creating a more accessible and adaptable user experience. The app supports different daily needs and contexts, allowing users to choose the right level of focus, break, or app control based on their current situation.</p>
+
+            <div class="cs-feature-grid">
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">01</span>
+                <div class="cs-feature-body">
+                  <h4>Pause Session</h4>
+                  <p>Enables users to step away from a focus session for longer periods when needed, while preserving their progress so they can easily resume where they left off.</p>
+                </div>
+                <div class="cs-feature-tags"><span class="cs-feature-tag">Mike</span></div>
+              </div>
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">02</span>
+                <div class="cs-feature-body">
+                  <h4>To-Do List&nbsp;</h4>
+                  <p>Helps users start each focus session with a clear goal, so they know what they are working on and have a reason to return to focus after a break.</p>
+                </div>
+                <div class="cs-feature-tags"><span class="cs-feature-tag sima">Sima</span></div>
+              </div>
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">03</span>
+                <div class="cs-feature-body">
+                  <h4>Peer Support&nbsp;</h4>
+                  <p>Connects users with a supportive community where they can stay motivated, build accountability, and feel less isolated while working toward their focus goals.</p>
+                </div>
+                <div class="cs-feature-tags"><span class="cs-feature-tag sima">Sima</span><span class="cs-feature-tag">Mike</span></div>
+              </div>
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">04</span>
+                <div class="cs-feature-body">
+                  <h4>Improved Screen Time Access&nbsp;</h4>
+                  <p>Makes the existing total screen-time limit easier to find by highlighting the icon, helping users manage their overall device use more quickly and clearly.</p>
+                </div>
+                <div class="cs-feature-tags"><span class="cs-feature-tag sima">Sima</span><span class="cs-feature-tag">Mike</span></div>
+              </div>
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">05</span>
+                <div class="cs-feature-body">
+                  <h4>Exit Reason prompt</h4>
+                  <p>Asks users why they are leaving a focus session, helping the app understand their needs and support better future focus experiences.</p>
+                </div>
+                <div class="cs-feature-tags"><span class="cs-feature-tag sima">Sima</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="usability">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Usability testing</span>
+            <h2 class="cs-problem-heading">60% of users struggled to understand the screen on first view. One UI improvement significantly increased clarity.</h2>
+            <p class="cs-problem-body">Designs were tested in a cold-start scenario, with no guidance provided to participants. Observed failures had identifiable causes, producing actionable insights for UI refinement.</p>
+
+            <div class="cs-testinfo-grid">
+              <img src="img/opal/test-1.png" alt="Usability test insight 1" style="padding: 0px;">
+              <img src="img/opal/test-info-1.svg" alt="Usability test insight 2">
+            </div>
+            <div class="cs-testinfo-grid">
+              <img src="img/opal/test-2.png" alt="Usability test insight 1" style="padding: 0px;">
+              <img src="img/opal/test-info-2.svg" alt="Usability test insight 2">
+            </div>
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="iteration">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Iteration</span>
+            <h2 class="cs-problem-heading">Two features required a second pass after Round 1 testing. The issues had clear causes, and the fixes were precise and targeted.</h2>
+
+            <picture>
+              <source media="(max-width: 900px)" srcset="img/opal/Iteration-mobile.svg">
+              <img src="img/opal/Iteration.svg" alt="Iteration before and after comparisons" class="cs-iteration-svg">
+            </picture>
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="reflection">
+          <div class="cs-problem-card">
+            <span class="cs-problem-badge">Reflection</span>
+            <h2 class="cs-problem-heading">Screen time management should feel empowering, not guilty or overwhelming.</h2>
+            <p class="cs-problem-body">Managing screen time is not only a productivity problem; it is also an emotional experience. Every design decision should ask: does this help users feel more in control, or does it make them feel guilty and overwhelmed?</p>
+
+            <div class="cs-feature-grid">
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">01</span>
+                <div class="cs-feature-body">
+                  <h4>Flexibility is key for real-life focus.</h4>
+                  <p>Users do not manage focus in perfect conditions. The app needs to support interruptions, breaks, and everyday responsibilities without making users start over.</p>
+                </div>
+              </div>
+
+              <div class="cs-feature-card">
+                <span class="cs-feature-num">02</span>
+                <div class="cs-feature-body">
+                  <h4>Screen time management should feel supportive, not restrictive.</h4>
+                  <p>I learned that users need more than control tools. They need an experience that helps them feel motivated, guided, and in control instead of guilty or overwhelmed.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+      <div class="cs-more">
+        <p class="cs-more-label">More case studies</p>
+        <div class="cs-more-grid">
+          <a class="cs-more-card" href="project-paypal.html">
+            <div class="cs-more-thumb"><img src="img/thumb-paypal.png" alt=""></div>
+            <p class="cs-more-eyebrow">App Design</p>
+            <h3 class="cs-more-title">Optimizing PayPal Transactions</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+        </div>
+      </div>
+    <hr class="divider">
+    <footer class="footer">
+      <div class="logo-circle"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+      <h2 class="footer-title">Let's design together.</h2>
+      <p class="footer-sub">Open to new roles, freelance work, or just a good conversation.</p>
+      <a href="mailto:parisa.khayami12@yahoo.com" class="footer-cta">parisa.khayami12@yahoo.com <span aria-hidden="true">→</span></a>
+    </footer>
+
+  </main>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

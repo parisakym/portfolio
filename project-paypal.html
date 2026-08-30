@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <title>Optimizing PayPal Transactions — Parisa Khayami</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&family=Shantell+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    :root{--bg:#eaf1f7;}
+    body{background-image:none;}
+
+    .cs-hero-logo-inline{height:1.7em; width:auto; vertical-align:-40px; display:inline-block;}
+    .cs-hero-title .accent{color:#39383c;}
+    .cs-role h3{color:#002991;}
+    .cs-hero-sub strong{color:#000;}
+    .cs-eyebrow{color:#002991; font-family:'Shantell Sans', cursive; font-weight:700;}
+    .cs-toc a.active{color:#002991;}
+    .cs-toc a.active .cs-toc-num{color:#002991;}
+
+    @media (max-width:900px){
+      .cs-toc{display:none;}
+      .cs-hero-logo-inline{height:1.6em; width:auto; vertical-align:-20px; display:inline-block;}
+      .cs-hero-title{line-height:1.7;}
+    }
+
+    #research .cs-interview-card{background:var(--card); border-radius:16px; padding:32px 32px; margin-top:24px; border:1px solid rgba(0,0,0,0.06);}
+    #research .cs-interview-card h3{
+      text-align:center; font-family:'Shantell Sans', cursive; font-weight:700; font-size:20px; color:#002991; margin:0 0 12px;
+    }
+    #research .cs-interview-card > p{color:#555; font-size:16px; line-height:1.7;}
+    #research .cs-interview-card strong{color:#333; font-weight:700;}
+    #research .cs-interview-photos{width:100%; height:auto; display:block; border-radius:12px;}
+    #research .cs-interview-photos + .cs-interview-photos{margin-top:20px;}
+
+    #research .cs-chat-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:24px;}
+    #research .cs-chat-time{text-align:right; font-size:13px; color:#888; margin:0 0 8px;}
+    #research .cs-chat-question{
+      background:#2b3245; color:#fff; border-radius:18px; padding:16px 22px; font-size:15px; line-height:1.5;
+      margin:0 0 24px auto; max-width:90%;
+    }
+    #research .cs-chat-reply{margin-bottom:18px;}
+    #research .cs-chat-name{display:block; font-size:12px; color:#888; margin:0 0 6px;}
+    #research .cs-chat-reply p{
+      background:#eceef1; color:#222; border-radius:14px; padding:14px 18px; font-size:14.5px; line-height:1.5; margin:0; max-width:95%;
+    }
+
+    @media (max-width:900px){
+      #research .cs-chat-grid{grid-template-columns:1fr; gap:32px;}
+    }
+
+    #research .cs-chat-summary{
+      text-align:center; color:#555; font-size:20px; line-height:1.5; margin:20px auto 0; max-width:760px;
+    }
+    #research .cs-chat-summary strong{color:#222; font-weight:700;}
+
+    #research .cs-interview-svg-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px;}
+    #research .cs-interview-svg-card{background:#fff; border-radius:16px; padding:20px; overflow:hidden;}
+    #research .cs-interview-svg-card img{width:100%; height:auto; display:block;}
+
+    @media (max-width:900px){
+      #research .cs-interview-svg-grid{grid-template-columns:1fr;}
+    }
+
+    @media (max-width:720px){
+      #research .cs-interview-card{padding:28px 24px;}
+    }
+
+    #assumptions .cs-finding-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;}
+    #assumptions .cs-finding-card{background:#ffffff; border-radius:16px; padding:28px 28px; text-align:center; border:1px solid rgba(0,0,0,0.06);}
+    #assumptions .cs-finding-card h3{
+      font-family:'Shantell Sans', cursive; font-weight:700; font-size:22px; color:#26408e;
+      margin:0 0 20px; line-height:1.3;
+    }
+    #assumptions .cs-finding-card p{margin:0; color:#4c4e54; font-size:15px; line-height:1.7;}
+
+    @media (max-width:720px){
+      #assumptions .cs-finding-grid{grid-template-columns:1fr;}
+    }
+
+    #context .cs-context-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:24px;}
+    #context .cs-context-card{background:var(--card); border-radius:16px; padding:24px 24px; border:1px solid rgba(0,0,0,0.06);}
+    #context .cs-context-card h3{
+      display:flex; align-items:center; gap:10px; font-family:'Shantell Sans', cursive; font-weight:700;
+      font-size:18px; color:#002991; margin:0 0 14px;
+    }
+    #context .cs-context-icon{font-size:20px; line-height:1;}
+    #context .cs-context-card p{margin:0; color:#555; font-size:15px; line-height:1.7;}
+    #context .cs-context-card strong{color:#333; font-weight:700;}
+
+    @media (max-width:900px){
+      #context .cs-context-grid{grid-template-columns:1fr;}
+    }
+
+    #affinity .cs-affinity-svg{width:100%; height:auto; display:block; margin-top:24px;}
+    #personas .cs-persona-svg{width:100%; height:auto; display:block; margin-top:24px;}
+    #solution .cs-impact-svg{width:100%; height:auto; display:block; margin-top:24px;}
+
+    #feedback .cs-feedback-shots{display:flex; flex-direction:column; gap:20px; margin-top:24px;}
+    #feedback .cs-feedback-shots img{width:100%; height:auto; display:block;}
+
+    #testing .cs-testing-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:32px;}
+    #testing .cs-testing-card{background:#ffffff; border-radius:16px; padding:28px;}
+    #testing .cs-testing-num{font-family:var(--font-display); font-weight:800; font-size:26px; color:#0b3fae; margin:0 0 4px;}
+    #testing .cs-testing-card p:last-child{margin:0; color:#111; font-size:16px; line-height:1.5;}
+    #testing .cs-testing-card strong{font-weight:700;}
+
+    #reflections .cs-reflections-list{margin:24px 0 0; padding-left:22px; display:flex; flex-direction:column; gap:24px;}
+    #reflections .cs-reflections-list li{color:#16234a; font-size:17px; line-height:1.6;}
+    #reflections .cs-reflections-list strong{font-weight:700;}
+
+    #final .cs-final-grid{display:grid; grid-template-columns:1fr; gap:20px; margin-top:24px;}
+    #final .cs-final-grid img{width:100%; height:auto; display:block;}
+
+    #final .cs-final-media{display:flex; justify-content:center; margin-top:24px;}
+
+    #competitive .cs-competitor-analysis{background:#ffffff; border-radius:24px; padding:24px; margin-top:24px; color:#373737;}
+    #competitive .cs-competitor-header{display:flex; align-items:center; gap:16px; margin-bottom:20px;}
+    #competitive .cs-competitor-logo{
+      height:56px; border-radius:12px; flex-shrink:0; display:block; object-fit:cover;
+    }
+    #competitive .cs-competitor-logo-remitly{border-radius:0;}
+    #competitive .cs-competitor-flow{width:100%; height:auto; display:block; margin-top:24px;}
+    #competitive .cs-competitor-title-group{display:flex; align-items:baseline; gap:0;}
+    #competitive .cs-competitor-header h3{margin:0; color:#000; font-family:'Shantell Sans', cursive; font-weight:800; font-size:24px;}
+    #competitive .cs-competitor-header h4{margin:0; color:#555; font-family:var(--font-sans); font-weight:400; font-size:15px;}
+    #competitive .cs-competitor-analysis > p{margin:0 0 32px; font-size:16px; line-height:1.7;}
+    #competitive .cs-competitor-screens{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+    #competitive .cs-competitor-screen-label{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#8a93ab; margin:0 0 10px;}
+    #competitive .cs-competitor-placeholder{
+      aspect-ratio:9/17; background:#0d0d0d; border:1px solid rgba(255,255,255,0.12); border-radius:20px;
+      display:flex; align-items:center; justify-content:center; text-align:center; padding:16px;
+      color:rgba(255,255,255,0.25); font-size:13px; margin-bottom:16px;
+    }
+    #competitive .cs-competitor-notes{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+    #competitive .cs-competitor-notes li{background:#fff; color:#111; border-left:3px solid #d9364f; border-radius:6px; padding:10px 14px; font-size:13px; line-height:1.5;}
+
+    @media (max-width:900px){
+      #competitive .cs-competitor-screens{grid-template-columns:1fr;}
+    }
+    #final .cs-final-media img{max-width:100%; height:auto; display:block; border-radius:75px;}
+
+    @media (max-width:720px){
+      #testing .cs-testing-grid{grid-template-columns:1fr;}
+    }
+
+    #personas .cs-problem-frame{border-radius:24px; padding:32px; margin-top:24px;}
+    #personas .cs-problem-frame-title{text-align:center; font-family:'Shantell Sans', cursive; font-weight:700; font-size:24px; color:#0b3fae; margin:0 0 20px;}
+    #personas .cs-finding-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+    #personas .cs-finding-card{background:#ffffff; border-radius:16px; padding:24px;}
+    #personas .cs-finding-card h3{font-family:var(--font-display); font-weight:700; font-size:20px; color:#0b3fae; margin:0 0 14px;}
+    #personas .cs-finding-card p{margin:0; color:#0b3fae; font-size:16px; line-height:1.6;}
+    #personas .cs-finding-card p strong{font-weight:700;}
+
+    @media (max-width:720px){
+      #personas .cs-finding-grid{grid-template-columns:1fr;}
+    }
+
+    #keys .cs-keyfinding-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;}
+    #keys .cs-keyfinding-card{background:#ffffff; border-radius:18px; padding:28px; border:1px solid rgba(0,0,0,0.06);}
+    #keys .cs-keyfinding-card h3{
+      display:flex; align-items:center; gap:12px; font-family:'Shantell Sans', cursive; font-weight:700; font-size:19px;
+      color:#26408e; margin:0 0 14px; line-height:1.3; letter-spacing:-0.8px;
+    }
+    #keys .cs-keyfinding-card p{margin:0; color:#3f4a63; font-size:15px; line-height:1.6;}
+
+    @media (max-width:720px){
+      #keys .cs-keyfinding-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body class="cs-page">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <div class="logo"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">Parisa <span class="accent">Khayami</span></div>
+          <div class="brand-sub">UX/UI Designer</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="primaryNavRhythm">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#home-about" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="btn-resume">Resume</a>
+      </nav>
+
+      <button class="hamburger" id="hamburgerRhythm" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="cs-main container">
+    <div class="cs-layout">
+      <nav class="cs-toc" aria-label="Case study sections">
+        <a href="#overview"><span class="cs-toc-num">01</span><span>Overview</span></a>
+        <a href="#context"><span class="cs-toc-num">02</span><span>Context</span></a>
+        <a href="#assumptions"><span class="cs-toc-num">03</span><span>Assumptions</span></a>
+        <a href="#research"><span class="cs-toc-num">04</span><span>Research</span></a>
+        <a href="#affinity"><span class="cs-toc-num">05</span><span>Affinity</span></a>
+        <a href="#keys"><span class="cs-toc-num">06</span><span>Finding</span></a>
+        <a href="#personas"><span class="cs-toc-num">07</span><span>Personas</span></a>
+        <a href="#competitive"><span class="cs-toc-num">08</span><span>Competitive</span></a>
+        <a href="#solution"><span class="cs-toc-num">09</span><span>Solution&nbsp;</span></a>
+        <a href="#feedback"><span class="cs-toc-num">10</span><span>Iterations</span></a>
+        <a href="#testing"><span class="cs-toc-num">11</span><span>Testing</span></a>
+        <a href="#final"><span class="cs-toc-num">12</span><span>Design</span></a>
+        <a href="#reflections"><span class="cs-toc-num">13</span><span>Reflections</span></a>
+      </nav>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="overview">
+          <h1 class="cs-hero-title"><span class="accent">Optimizing the Transaction Processes for users in <img src="img/paypal/paypal-logo.png" alt="PayPal" class="cs-hero-logo-inline cs-no-lightbox"></span></h1>
+          <p class="cs-hero-sub">This case study was part of a UX challenge conducted <strong>under the supervision of a mentor</strong> who provided guidance and feedback throughout the project. The subject of the challenge was to <strong>improve the UX issues of a popular and frequently used application.</strong> This challenge aimed to simulate a real-world design scenario, allowing our team to apply our skills and knowledge in a practical setting through an iterative research and ideation process.</p>
+
+          <div class="cs-tags-row">
+            <span>Mobile App</span>
+            <span>UX Research</span>
+            <span>Feb/ 6 weeks</span>
+            <span>3 person team</span>
+            <span>1 mentor</span>
+          </div>
+
+          <div class="cs-role">
+            <h3>My Role</h3>
+            <p>This case study was completed as part of a UX challenge under the guidance of a mentor who provided feedback throughout the project. I collaborated with two other UX designers, leading the project end-to-end through daily remote collaboration and also contributing hands-on as a UX Designer. Balancing leadership and hands-on design allowed me to bring both strategic direction and practical design thinking to the project.</p>
+          </div>
+
+        </section>
+
+        <section class="cs-section" id="context">
+          <p class="cs-eyebrow">🎙️ Context</p>
+            <p>PayPal is a digital payment platform that allows individuals and businesses to send, receive, and manage money securely online. In this case study, <strong>we explore the payment process</strong> within the PayPal app <strong>to identify pain points</strong> and <strong>design solutions</strong> that enhance the user experience. Improving these features is crucial for PayPal as it ensures user satisfaction, encourages frequent use, and maintains its competitive edge in the digital payment market.</p>
+
+
+          <div class="cs-context-grid">
+            <div class="cs-context-card">
+              <h3><span class="cs-context-icon">💼</span> Business Objective</h3>
+              <p><strong>Increase efficiency and reduce friction</strong> by simplifying and streamlining the transaction processes on PayPal.</p>
+            </div>
+            <div class="cs-context-card">
+              <h3><span class="cs-context-icon">⚠️</span> Problem</h3>
+              <p>Users frequently encounter <strong>difficulties</strong> and <strong>confusion</strong> during transactions on PayPal, resulting in delays, errors, and frustration. This impacts <strong>user satisfaction</strong> and potentially <strong>reduces the frequency of use</strong>.</p>
+            </div>
+            <div class="cs-context-card">
+              <h3><span class="cs-context-icon">🏁</span> Expected Outcome</h3>
+              <p>A <strong>more intuitive and efficient transaction process</strong> that minimizes errors, reduces transaction time, and enhances overall user satisfaction and engagement with the PayPal platform.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="assumptions">
+          <div class="cs-section-head"><p class="cs-eyebrow">💬️ Our Assumptions</p>
+<p>Prior to starting our research, we outlined our assumptions regarding possible challenges in PayPal's transaction process based on our experience as users. These assumptions helped shape the direction of our research moving forward.</p>
+
+</div>
+
+          <div class="cs-finding-grid">
+            <div class="cs-finding-card">
+              <h3>Difficult Bank Account Linking and Transactions</h3>
+              <p>Users faced challenges with unclear instructions for adding bank accounts, lack of immediate feedback after payments, delayed transfers, complex setups with 2-step verification, and confusion about fees deducted from both parties.</p>
+            </div>
+            <div class="cs-finding-card">
+              <h3>Confusing Receipts and Confirmation Step</h3>
+              <p>Users faced issues with a lack of receipts, no clear labels for recent transactions, unclear confirmation page during money transfer, and a poorly functioning messaging feature that doesn't provide in-app notifications.</p>
+            </div>
+            <div class="cs-finding-card">
+              <h3>Inconsistent Navigation and User Interface</h3>
+              <p>Users encountered issues with unclear icons and titles, difficulty selecting and changing payment cards, and the lack of intuitive button indicators, along with limited support for biometric or face ID logins on Android devices.</p>
+            </div>
+            <div class="cs-finding-card">
+              <h3>Unclear Errors and Fees</h3>
+              <p>Users struggled with vague error messages that often fail to specify the issue, and experienced confusion due to fees that are sometimes not clearly mentioned or explained, leading to uncertainty and frustration.</p>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="cs-section" id="research">
+          <div class="cs-section-head"><p class="cs-eyebrow">🔎&nbsp;Research</p></div>
+          <p>To identify the pain points users face while using the PayPal app, we conducted both primary and secondary research.</p>
+
+          <div class="cs-interview-card">
+            <h3>Interview</h3>
+            <p>We conducted <strong>5 user interviews</strong> with a diverse group of users to gather direct feedback on their experiences with the PayPal app. This helped us understand specific usability issues and user frustrations.</p>
+            <img src="img/paypal/paypal-interview.png" alt="Screenshots from user interview video calls" class="cs-interview-photos">
+            <div class="cs-interview-svg-grid">
+              <div class="cs-interview-svg-card"><img src="img/paypal/paypal-interview01.svg" alt="User interview insight summary"></div>
+              <div class="cs-interview-svg-card"><img src="img/paypal/paypal-interview02.svg" alt="User interview insight summary"></div>
+            </div>
+
+            <p class="cs-chat-summary">The biggest themes that we discovered based on the interviews was <strong>Unclear Transaction fee, Unclear Error and Confusing transaction process.</strong></p>
+          </div>
+
+          <div class="cs-interview-card">
+            <h3>Desk Research</h3>
+            <p>We analyzed online sources such <strong>Apple and Google app store</strong>s and websites like <strong>Reddit and Trustpilot</strong> to see what problems other users have reported. This gave us a broader perspective on common issues faced by the PayPal user base.</p>
+            <img src="img/paypal/Paypal-desk.svg" alt="Annotated screenshots of app store and Reddit reviews highlighting common PayPal complaints" class="cs-interview-photos">
+          </div>
+
+        </section>
+
+        <section class="cs-section" id="affinity">
+          <div class="cs-section-head"><p class="cs-eyebrow">📌 Affinity Diagram</p></div>
+          <p>Based on the key findings from interviews and online reviews about PayPal's transaction process, we compiled and organized the information into different categories:</p>
+
+          <img src="img/paypal/paypal-affinity.png" alt="Affinity diagram organizing PayPal transaction pain points into categories" class="cs-affinity-svg">
+
+        </section>
+
+        <section class="cs-section" id="keys">
+          <div class="cs-section-head"><p class="cs-eyebrow">🔑️&nbsp;Key Finding</p></div>
+          <p>Our research, comprising both user interviews and analysis of online sources such as app store and website reviews, revealed several key issues with the PayPal app.</p>
+
+          <div class="cs-keyfinding-grid">
+            <div class="cs-keyfinding-card">
+              <h3>🤷‍♂️ Getting Around the App is Tough</h3>
+              <p>Users struggled to find the payment feature easily, and the app's navigation was often described as confusing and inconsistent. The interface was often described as cluttered and difficult to navigate, making it hard for users to find what they needed.</p>
+            </div>
+            <div class="cs-keyfinding-card">
+              <h3>💸 Payment and Confirmation Woes</h3>
+              <p>The confirmation steps were not straightforward, causing confusion and frustration among users. They also expressed a desire for a quicker way to send money to frequent contacts, as the current process was seen as cumbersome, with transactions often remaining pending for an extended period.</p>
+            </div>
+            <div class="cs-keyfinding-card">
+              <h3>❓ Confusing Errors and Surprise Fees</h3>
+              <p>Users frequently reported unclear error messages during their transactions, which often failed to specify the issue. Moreover, many users were confused about transaction fees, which were sometimes not clearly mentioned or explained, leading to unexpected charges.</p>
+            </div>
+            <div class="cs-keyfinding-card">
+              <h3>🤯 Customer Support Headaches</h3>
+              <p>Users expressed frustration with the lack of timely and helpful customer support, which exacerbated their issues with the app. The delays and unhelpful responses made resolving problems difficult and added to their overall dissatisfaction with the service.</p>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="cs-section" id="personas">
+          <div class="cs-section-head"><p class="cs-eyebrow">👩 Personas</p><p>Through our research and key findings, we identified two main user personas. These personas helped guide our design decisions by providing a clear picture of the users' goals, frustrations, and behaviors.</p></div>
+
+          <picture>
+            <source media="(max-width: 900px)" srcset="img/paypal/paypal-persona1-mobile.png">
+            <img src="img/paypal/paypal-persona1.png" alt="User persona profile: Simple Cassie" class="cs-persona-svg">
+          </picture>
+
+          <div class="cs-problem-frame">
+            <p class="cs-problem-frame-title">Problem statement</p>
+            <div class="cs-finding-grid">
+              <div class="cs-finding-card">
+                <h3>User Problem</h3>
+                <p>As a <strong>less tech-savvy user</strong>, I need/want a <strong>a simple and secure platform for managing personal transactions and online shopping</strong> &nbsp;so that <strong>I can complete tasks efficiently without frustration.</strong></p>
+              </div>
+              <div class="cs-finding-card">
+                <h3>User Need</h3>
+                <p><strong>Managing personal transactions and online shopping</strong>, is challenging for <strong>less tech-savvy</strong> users because <strong>of confusing navigation, instructions, and UI.</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <picture>
+            <source media="(max-width: 900px)" srcset="img/paypal/paypal-persona2-mobile.png">
+            <img src="img/paypal/paypal-persona2.png" alt="User persona profile: Efficient Fred" class="cs-persona-svg">
+          </picture>
+
+          <div class="cs-problem-frame">
+            <p class="cs-problem-frame-title">Problem statement</p>
+            <div class="cs-finding-grid">
+              <div class="cs-finding-card">
+                <h3>User Problem</h3>
+                <p><strong>Managing financial transactions</strong>, is challenging for  <strong>power users</strong> because <strong>of inconsistent transaction fees and difficult navigation.</strong></p>
+              </div>
+              <div class="cs-finding-card">
+                <h3>User Need</h3>
+                <p>As a <strong>tech-savvy business owner</strong>, I need/want a <strong>reliable and transparent platform for managing financial transactions</strong> &nbsp;so that <strong>I can streamline my finances efficiently and save time.</strong></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="competitive">
+          <div class="cs-section-head"><p class="cs-eyebrow">🔍 Competitive Analysis</p><p>To understand how PayPal's user experience compares to its competitors, we conducted a competitive analysis focusing on key features and usability aspects. We analyzed popular payment apps, including Wise, Apple Pay, and Remitly, to identify strengths and weaknesses relative to PayPal. Although some of the chosen apps aren't directly PayPal remittance competitors but there were interesting features within them that gave us insight for our designs.</p></div>
+
+          <div class="cs-competitor-analysis">
+            <div class="cs-competitor-header">
+              <img src="img/paypal/Wise-paypal.png" alt="Wise logo" class="cs-competitor-logo">
+              <h3>Wise</h3>
+            </div>
+            <p>Wise, formerly known as TransferWise, is a service focused on providing low-cost international money transfers. It emphasizes transparency in fees and offers competitive exchange rates, making it a popular choice for sending money across borders.</p>
+
+            <picture>
+              <source media="(max-width: 900px)" srcset="img/paypal/wise-paypal01-mobile.svg">
+              <img src="img/paypal/wise-paypal01.svg" alt="Annotated walkthrough of the Wise app flow" class="cs-competitor-flow">
+            </picture>
+          </div>
+
+          <div class="cs-competitor-analysis">
+            <div class="cs-competitor-header">
+              <img src="img/paypal/Apple-paypal.png" alt="Apple Pay logo" class="cs-competitor-logo">
+              <div class="cs-competitor-title-group">
+                <h3>Apple Pay</h3>
+                <h4>(for online payments)</h4>
+              </div>
+            </div>
+            <p>Apple Pay is a mobile payment and digital wallet service by Apple Inc. that allows users to make payments in person, in iOS apps, and on the web using Safari. Known for its seamless integration with the Apple ecosystem and strong security features, Apple Pay offers a streamlined and secure experience for online purchases. Although the compared features of this service might be out of scope for this case study, there are overlaps they we can analyze further.</p>
+
+            <picture>
+              <source media="(max-width: 900px)" srcset="img/paypal/Apple-paypal01-mobile.svg">
+              <img src="img/paypal/Apple-paypal01.svg" alt="Annotated walkthrough of the Apple Pay app flow" class="cs-competitor-flow">
+            </picture>
+          </div>
+
+          <div class="cs-competitor-analysis">
+            <div class="cs-competitor-header">
+              <img src="img/paypal/Remitly-paypal.png" alt="Remitly logo" class="cs-competitor-logo cs-competitor-logo-remitly">
+              <h3>Remitly</h3>
+            </div>
+            <p>Remitly is a digital remittance service that allows users to send money internationally with speed and ease. Known for its multiple transfer options, Remitly caters to users looking for reliable and affordable ways to send money across borders.</p>
+
+            <picture>
+              <source media="(max-width: 900px)" srcset="img/paypal/Remitly-paypal01-mobile.svg">
+              <img src="img/paypal/Remitly-paypal01.svg" alt="Annotated walkthrough of the Remitly app flow" class="cs-competitor-flow">
+            </picture>
+          </div>
+        </section>
+
+        <section class="cs-section" id="solution">
+          <div class="cs-section-head"><p class="cs-eyebrow">🧐 Ideation and Solution</p><p>After identifying and prioritizing user pain points and proposing design solutions, we used an impact-effort matrix to evaluate which changes would provide the most value to users with the reasonable amount of development effort. This helped us prioritize our efforts and ensure that we focused on solutions that would deliver the greatest impact.</p></div>
+
+          <img src="img/paypal/impact-paypal.svg" alt="Impact-effort matrix prioritizing PayPal design solutions" class="cs-impact-svg">
+        </section>
+
+        <section class="cs-section" id="feedback">
+          <div class="cs-section-head"><p class="cs-eyebrow">✍️&nbsp; User feedback and Iterations&nbsp;</p><p>We narrowed down on potential ideas and, we iterated on the design for PayPal Transaction process based on the user needs and pain points. We created high-fidelity prototype and moved on to evaluate on that.</p></div>
+
+          <div class="cs-feedback-shots">
+            <img src="img/paypal/feedback1.png" alt="Feedback annotations: home screen scrollability and send amount screen confusion">
+            <img src="img/paypal/feedback2.png" alt="Feedback annotations: fee text spacing and review screen recognition">
+          </div>
+        </section>
+
+        <section class="cs-section" id="testing">
+          <div class="cs-section-head"><p class="cs-eyebrow">🎯️&nbsp;User Testing Insights</p><p>We evaluated our initial design by conducting tests with users and collecting feedback.       </p></div>
+
+          <div class="cs-testing-grid">
+            <div class="cs-testing-card">
+              <p class="cs-testing-num">01</p>
+              <p>Users <strong>were confused</strong> to find and understand all the transactions informations.</p>
+            </div>
+            <div class="cs-testing-card">
+              <p class="cs-testing-num">02</p>
+              <p>Users <strong>need more clarity</strong> regarding the transactions steps.</p>
+            </div>
+            <div class="cs-testing-card">
+              <p class="cs-testing-num">03</p>
+              <p>Users <strong>had difficulty</strong> for exploring the home page.</p>
+            </div>
+            <div class="cs-testing-card">
+              <p class="cs-testing-num">04</p>
+              <p>User <strong>get confused</strong> that the transaction is successful or not.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="final">
+          <div class="cs-section-head"><p class="cs-eyebrow">🎬 Final Design</p></div>
+
+          <div class="cs-final-grid">
+            <img src="img/paypal/final-design-0.svg" alt="Final design overview">
+            <img src="img/paypal/final-design-1.svg" alt="Final design screen 1">
+            <img src="img/paypal/final-design-2.svg" alt="Final design screen 2">
+            <img src="img/paypal/final-design-3.svg" alt="Final design screen 3">
+            <img src="img/paypal/final-design-4.svg" alt="Final design screen 4">
+            <img src="img/paypal/final-design-5.svg" alt="Final design screen 5">
+          </div>
+
+          <div class="cs-final-media">
+            <img src="img/paypal/Paypal-final.gif" alt="Animated walkthrough of the final PayPal transaction design">
+          </div>
+        </section>
+
+        <section class="cs-section" id="reflections">
+          <div class="cs-section-head"><p class="cs-eyebrow">🤔 Reflections</p></div>
+          <ul class="cs-reflections-list">
+            <li>Our research revealed that while visual improvements are important, users place a higher value on <strong>security</strong>, <strong>reliability</strong>, and <strong>cost of service</strong>. Many users expressed concerns about the security of their transactions, the reliability of the service, and the transparency of fees. Our design aimed to assist users to reach these criteria with a user centric approach.</li>
+            <li>We noted significant differences between users' behaviors and needs. Frequent users seek a <strong>dependable</strong> and <strong>clear platform</strong> for efficient financial management, while casual users prefer more <strong>intuitive navigation</strong> and <strong>clear instructions</strong>. Understanding these varied needs allowed us to tailor our solutions to enhance the experience for both user groups</li>
+            <li>Compared to similar apps, PayPal offers <strong>few unique advantages</strong>, resulting in <strong>low user loyalty</strong>. Recognizing the importance of <strong>strong design</strong> and a <strong>positive user experience</strong>, we aim to enhance both aspects to foster greater user satisfaction and retention.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+      <div class="cs-more">
+        <p class="cs-more-label">More case studies</p>
+        <div class="cs-more-grid">
+          <a class="cs-more-card" href="project-Opal.html">
+            <div class="cs-more-thumb"><img src="img/thumb-opal.png" alt=""></div>
+            <p class="cs-more-eyebrow">App Design</p>
+            <h3 class="cs-more-title">Opal lacks of flexibility</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+          <a class="cs-more-card" href="p-brand.html">
+            <div class="cs-more-thumb"><img src="img/thumb-p-brand.png" alt=""></div>
+            <p class="cs-more-eyebrow">Graphic Design</p>
+            <h3 class="cs-more-title">Personal Brand</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+        </div>
+      </div>
+    <hr class="divider">
+    <footer class="footer">
+      <div class="logo-circle"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+      <h2 class="footer-title">Let's design together.</h2>
+      <p class="footer-sub">Open to new roles, freelance work, or just a good conversation.</p>
+      <a href="mailto:parisa.khayami12@yahoo.com" class="footer-cta">parisa.khayami12@yahoo.com <span aria-hidden="true">→</span></a>
+    </footer>
+
+  </main>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

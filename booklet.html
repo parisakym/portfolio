@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <title>Nimbus Cloud Onboarding — Parisa Khayami</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    body{background-image:none;}
+    .cs-brand-image{width:100%; height:auto; display:block; margin-top:24px;}
+    #cookbook .cs-brand-image{border-radius:16px;}
+    .cs-download-wrap{text-align:center; margin-top:24px;}
+    .cs-download-btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none;}
+    .cs-mockups-row{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:24px;}
+    .cs-mockups-row img{width:100%; height:auto; display:block;}
+
+    @media (max-width:720px){
+      .cs-mockups-row{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body class="cs-page">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <div class="logo"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">Parisa <span class="accent">Khayami</span></div>
+          <div class="brand-sub">UX/UI Designer</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="primaryNavNimbus">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#home-about" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="btn-resume">Resume</a>
+      </nav>
+
+      <button class="hamburger" id="hamburgerNimbus" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="cs-main container">
+    <div class="cs-layout">
+      <nav class="cs-toc" aria-label="Case study sections">
+        <a href="#overview"><span class="cs-toc-num">01</span><span>Overview</span></a>
+        <a href="#cookbook"><span class="cs-toc-num">02</span><span>cookbook</span></a>
+        <a href="#magazine"><span class="cs-toc-num">03</span><span>magazine</span></a>
+      </nav>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="overview">
+          <h1 class="cs-hero-title">Designing <span class="accent">Booklet</span></h1>
+          <p class="cs-hero-sub">This college project focused on designing a multi-page booklet from concept to final layout. The goal was to create a visually engaging and well-structured publication that effectively organized content while maintaining a consistent visual identity. The project involved developing page layouts, establishing typography and grid systems, selecting imagery, and ensuring a clear reading experience. Through this process, I explored the principles of editorial design, visual hierarchy, and information organization to create a cohesive and polished final booklet.</p>
+
+
+
+          <div class="cs-tags-row">
+            <span>Graphic Design</span>
+            <span>Layout</span>
+            <span>Solo team</span>
+
+
+          </div>
+        </section>
+
+        <section class="cs-section" id="cookbook">
+          <div class="cs-section-head"><p class="cs-eyebrow">Cookbook</p></div>
+          <div class="ph-box"><p>A project focused on designing a complete cookbook from cover to final page. The project involved creating a cohesive editorial layout, establishing typography and visual hierarchy, and crafting an engaging reading experience throughout the publication.</p></div>
+
+          <div class="cs-download-wrap">
+            <a href="img/booklet/Persian_cook_book_.pdf" download class="btn-primary cs-download-btn">Download Cookbook PDF </a>
+          </div>
+
+          <img src="img/booklet/cookbook.jpg" alt="Cookbook spread featuring a Kuku Sabzi Persian appetizer recipe" class="cs-brand-image">
+        </section>
+
+        <section class="cs-section" id="magazine">
+          <div class="cs-section-head"><p class="cs-eyebrow">Magazine</p></div>
+<div class="ph-box"><p>A project focused on designing a two-page magazine spread. The project explored editorial layout, typography, and visual hierarchy to create an engaging and well-balanced reading experience.</p></div>
+
+          <img src="img/booklet/layout-explore.jpg" alt="Magazine spread featuring the Tabatabaei House article for Kashan Attractions" class="cs-brand-image">
+
+          <div class="cs-mockups-row">
+            <img src="img/booklet/explore1.jpg" alt="Tabatabaei House magazine page 05">
+            <img src="img/booklet/explore2.jpg" alt="Tabatabaei House magazine page 06">
+          </div>
+        </section>
+
+      </div>
+    </div>
+      <div class="cs-more">
+        <p class="cs-more-label">More case studies</p>
+        <div class="cs-more-grid">
+          <a class="cs-more-card" href="cover-book.html">
+            <div class="cs-more-thumb"><img src="img/thumb-cover-book.png" alt=""></div>
+            <p class="cs-more-eyebrow">Graphic Design</p>
+            <h3 class="cs-more-title">Redesign cover books</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+        </div>
+      </div>
+    <hr class="divider">
+    <footer class="footer">
+      <div class="logo-circle"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+      <h2 class="footer-title">Let's design together.</h2>
+      <p class="footer-sub">Open to new roles, freelance work, or just a good conversation.</p>
+      <a href="mailto:parisa.khayami12@yahoo.com" class="footer-cta">parisa.khayami12@yahoo.com <span aria-hidden="true">→</span></a>
+    </footer>
+
+  </main>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

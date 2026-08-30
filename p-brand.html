@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <title>Personal Brand — Parisa Khayami</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    body{background-image:none;}
+    .cs-tags-row span{background:#ebebeb;}
+    .cs-hero-title{font-size:clamp(2.1rem, 5.5vw, 3.25rem);}
+    #overview .cs-overview-layout{display:flex; gap:40px; align-items:center; margin-bottom:28px;}
+    .cs-hero-banner{width:420px; height:auto; display:block; border-radius:8px; flex-shrink:0; margin:0;}
+    #overview .cs-overview-text{flex:1; min-width:0;}
+    #overview .cs-overview-text .cs-hero-sub{margin-top:16px;}
+
+    @media (max-width:720px){
+      #overview .cs-overview-layout{flex-direction:column; align-items:stretch;}
+      .cs-hero-banner{width:100%;}
+    }
+
+    @media (max-width:900px){
+      .cs-toc{display:none;}
+    }
+    #sketches .cs-sketches-svg{width:100%; height:auto; display:block; margin-top:24px;}
+
+    .cs-brand-image{width:100%; height:auto; display:block; margin-top:24px;}
+    .cs-brand-image + .cs-brand-image{margin-top:20px;}
+    .cs-rounded{border-radius:16px;}
+
+    #inspiration .cs-inspiration-layout{display:flex; gap:40px; align-items:center; margin-top:24px;}
+    #inspiration .cs-inspiration-img{width:340px; flex-shrink:0; display:block; border-radius:20px;}
+    #inspiration .cs-inspiration-layout .ph-box{flex:1; font-size:16px; line-height:1.6; color:#555;}
+
+    @media (max-width:720px){
+      #inspiration .cs-inspiration-layout{flex-direction:column; align-items:stretch;}
+      #inspiration .cs-inspiration-img{width:100%;}
+    }
+  </style>
+</head>
+<body class="cs-page">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <div class="logo"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">Parisa <span class="accent">Khayami</span></div>
+          <div class="brand-sub">UX/UI Designer</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="primaryNavLumen">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#home-about" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="btn-resume">Resume</a>
+      </nav>
+
+      <button class="hamburger" id="hamburgerLumen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="cs-main container">
+    <div class="cs-layout">
+      <nav class="cs-toc" aria-label="Case study sections">
+        <a href="#overview"><span class="cs-toc-num">01</span><span>Overview</span></a>
+        <a href="#problem"><span class="cs-toc-num">02</span><span>Problem</span></a>
+        <a href="#sketches"><span class="cs-toc-num">03</span><span>Sketches</span></a>
+        <a href="#inspiration"><span class="cs-toc-num">04</span><span>Inspiration</span></a>
+        <a href="#typography"><span class="cs-toc-num">05</span><span>Typography</span></a>
+        <a href="#color"><span class="cs-toc-num">06</span><span>Color</span></a>
+        <a href="#mockups"><span class="cs-toc-num">07</span><span>Mockups</span></a>
+      </nav>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="overview">
+          <div class="cs-overview-layout">
+            <img src="img/p-brand/hero-image.png" alt="Personal Brand hero banner featuring the Parisa Khayami logo construction" class="cs-hero-banner">
+            <div class="cs-overview-text">
+              <h1 class="cs-hero-title">Designing <span class="accent">Personal brand</span></h1>
+              <p class="cs-hero-sub">I created my personal brand as a visual expression of my cultural roots and creative perspective. It brings together my Iranian background and my approach to design in a way that feels personal, distinctive, and authentic.</p>
+            </div>
+          </div>
+
+          <div class="cs-role">
+            <h3>My Role</h3>
+            <p>I managed the project from concept to final execution, including visual exploration, logo development, and brand direction. My goal was to build a cohesive system that communicates my personality and design approach.</p>
+          </div>
+
+          <div class="cs-tags-row">
+            <span>Graphic Design</span>
+            <span>Branding</span>
+
+
+            <span>Solo team</span>
+          </div>
+        </section>
+
+        <section class="cs-section" id="problem">
+          <div class="cs-section-head"><p class="cs-eyebrow">Problem</p></div>
+          <div class="ph-box"><p>I wanted to create a personal brand that felt more meaningful than a simple visual mark. The challenge was to translate my background, personality, and design philosophy into a modern and cohesive visual language while keeping it clear, versatile, and functional.</p></div>
+        </section>
+
+        <section class="cs-section" id="sketches">
+          <div class="cs-section-head"><p class="cs-eyebrow">Sketches</p></div>
+
+          <picture>
+            <source media="(max-width: 900px)" srcset="img/p-brand/sketches-p-mobile.svg">
+            <img src="img/p-brand/sketches-p.svg" alt="Early sketches exploring the personal brand logo" class="cs-sketches-svg">
+          </picture>
+        </section>
+
+        <section class="cs-section" id="inspiration">
+          <div class="cs-section-head"><p class="cs-eyebrow">Inspiration</p></div>
+
+          <div class="cs-inspiration-layout">
+            <img src="img/p-brand/Inspiration.jpg" alt="Inspiration board for the Personal Brand identity" class="cs-inspiration-img">
+            <div class="ph-box"><p>My inspiration came from the Persian language, my cultural roots, and my passion for visual communication. This led me to explore the connection between the English "P" and Persian "پ", two forms that represent different sides of my story while coming together as one visual concept.</p></div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="typography">
+          <div class="cs-section-head"><p class="cs-eyebrow">Typography</p></div>
+
+          <img src="img/p-brand/Typography.jpg" alt="Typography specimen for the Personal Brand identity" class="cs-brand-image">
+        </section>
+
+        <section class="cs-section" id="color">
+          <div class="cs-section-head"><p class="cs-eyebrow">Color</p></div>
+
+          <img src="img/p-brand/color-b.png" alt="Color palette board for the Personal Brand identity" class="cs-brand-image">
+        </section>
+
+        <section class="cs-section" id="mockups">
+          <div class="cs-section-head"><p class="cs-eyebrow">Mockups</p></div>
+
+          <img src="img/p-brand/mockups01.jpg" alt="Business card mockups for the Personal Brand identity" class="cs-brand-image cs-rounded">
+          <img src="img/p-brand/mockups02.png" alt="Mug and cap mockups for the Personal Brand identity" class="cs-brand-image cs-rounded">
+        </section>
+
+      </div>
+    </div>
+      <div class="cs-more">
+        <p class="cs-more-label">More case studies</p>
+        <div class="cs-more-grid">
+          <a class="cs-more-card" href="project-paypal.html">
+            <div class="cs-more-thumb"><img src="img/thumb-paypal.png" alt=""></div>
+            <p class="cs-more-eyebrow">App Design</p>
+            <h3 class="cs-more-title">Optimizing PayPal Transactions</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+          <a class="cs-more-card" href="bazaar.html">
+            <div class="cs-more-thumb"><img src="img/thumb-bazaar.png" alt=""></div>
+            <p class="cs-more-eyebrow">Graphic Design</p>
+            <h3 class="cs-more-title">Rebranding of Grocery Store</h3>
+            <span class="cs-more-cta">View case study →</span>
+          </a>
+        </div>
+      </div>
+    <hr class="divider">
+    <footer class="footer">
+      <div class="logo-circle"><img src="img/logo.png" alt="Parisa Khayami logo"></div>
+      <h2 class="footer-title">Let's design together.</h2>
+      <p class="footer-sub">Open to new roles, freelance work, or just a good conversation.</p>
+      <a href="mailto:parisa.khayami12@yahoo.com" class="footer-cta">parisa.khayami12@yahoo.com <span aria-hidden="true">→</span></a>
+    </footer>
+
+  </main>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
