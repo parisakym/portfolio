@@ -81,10 +81,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     const revealWords = document.querySelectorAll('.reveal-word');
 
+    const revealSticky = revealSection.querySelector('.home-about-sticky');
+
     function updateReveal() {
       const rect = revealSection.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const progress = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 1;
+      let progress;
+      if (getComputedStyle(revealSticky).position === 'sticky') {
+        // Pinned layout: progress follows scroll through the extra section height
+        const scrollable = rect.height - window.innerHeight;
+        progress = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 1;
+      } else {
+        // Un-pinned (phones): start as the text scrolls into view, finish once the section's end reaches 70% of the screen
+        const vh = window.innerHeight;
+        progress = Math.min(1, Math.max(0, (0.75 * vh - rect.top) / (0.05 * vh + rect.height)));
+      }
       const activeCount = Math.floor(progress * revealWords.length);
       revealWords.forEach((word, i) => {
         word.style.opacity = i < activeCount ? 1 : '';
