@@ -105,7 +105,7 @@ body{
 .role{color:var(--muted); margin-top:12px; font-weight:500; font-size: 12px;}
 .lastname{display:flex; gap:8px;}
 .hero-profile{justify-self:end;}
-.profile-img{width:300px; object-fit:cover; display:block;}
+.profile-img{width:300px; aspect-ratio:1718/1800; height:auto; object-fit:cover; display:block;}
 
 /* Home about band */
 .home-about{background:var(--accent); color:#fff; height:200vh; scroll-margin-top:91px;}
@@ -139,7 +139,7 @@ body{
 }
 .cards-row::-webkit-scrollbar{height:10px}
 .card{background:var(--card); border-radius:12px; padding:14px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:10px;}
-.thumb{border-radius:8px; overflow:hidden; background:#ddd;}
+.thumb{border-radius:8px; overflow:hidden; background:#ddd; aspect-ratio:1600/878;}
 .thumb img{width:100%; height:100%; object-fit:cover; display:block;}
 .meta{font-size:13px; color:var(--muted);}
 .card-title{margin:4px 0 0; font-size:15px; font-weight:600;}
@@ -170,7 +170,7 @@ body{
 .projects-group:first-of-type .projects-group-title{border-top:none; padding-top:0;}
 .projects-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:22px; margin-bottom:42px;}
 .project-card{background:var(--card); padding:14px; border-radius:12px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,0.05);}
-.project-thumb{overflow:hidden; margin-bottom:12px;}
+.project-thumb{overflow:hidden; margin-bottom:12px; aspect-ratio:1600/878;}
 .project-thumb img{width:100%; height:100%; object-fit:cover; border-radius:8px; border:1px solid rgba(97,94,94,0.15);}
 .excerpt{color:var(--muted); font-size:14px; margin:8px 0 0;}
 

@@ -1,5 +1,14 @@
 // small script to toggle mobile menu
 document.addEventListener('DOMContentLoaded', function () {
+  // If the page was opened on an anchor (e.g. index.html#contact), re-align once everything has loaded
+  // so late layout changes can't leave the visitor above the target section.
+  if (location.hash.length > 1) {
+    window.addEventListener('load', () => {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }, { once: true });
+  }
+
   // Skeleton shimmer placeholder for every image, site-wide
   document.querySelectorAll('img').forEach(img => {
     function markLoaded() {
