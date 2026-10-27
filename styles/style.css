@@ -151,13 +151,42 @@ body{
 /* Rule and footer */
 .divider{border:0; border-top:1px solid #a83a4a; margin:40px 80px;}
 .container .divider{margin-left:0; margin-right:0;}
-.footer{padding:0 0 80px; text-align:center; scroll-margin-top:90px;}
-.logo-circle{width:56px;height:56px;border-radius:50%;display:inline-grid;place-items:center;overflow:hidden; margin-bottom:20px;}
-.logo-circle img{width:100%; height:100%; object-fit:contain;}
-.footer-title{margin:0 0 10px; font-size:24px; font-weight:600;}
-.footer-sub{color:var(--muted); font-size:15px; margin:0 0 28px;}
-.footer-cta{display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:15px; padding:14px 28px; border-radius:999px; transition:opacity .15s ease, transform .15s ease;}
-.footer-cta:hover{opacity:.92; transform:translateY(-1px);}
+/* Contact footer: full-width cream band with big bold type */
+.footer{
+  position:relative; text-align:center; scroll-margin-top:0; margin-top:56px;
+  padding:112px 24px 104px; color:#111; background:#fffdf0;
+  /* paint the band edge-to-edge even though the footer sits inside a max-width container */
+  box-shadow:0 0 0 100vmax #fffdf0; clip-path:inset(0 -100vmax);
+}
+.footer-title{
+  margin:0 auto; font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  font-size:clamp(2.2rem, 10.5vw, 5.2rem); line-height:.96; letter-spacing:-.045em; text-wrap:balance; color:#0b0b0f;
+}
+.footer-title .line{display:inline}
+.footer-title .nw{white-space:nowrap}
+.footer-peace{display:inline-block; height:1.18em; width:auto; vertical-align:-.12em; margin-left:.1em; transform:rotate(5deg); transform-origin:50% 90%;}
+.footer-sub{margin:44px 0 6px; font-size:clamp(16px, 4.2vw, 20px); font-weight:300; color:#222;}
+.footer-mail{position:relative; display:inline-block; max-width:100%;}
+.footer-cta{
+  display:inline-block; color:#111; font-weight:600; font-size:clamp(16px, 4.6vw, 22px); letter-spacing:.005em;
+  text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:6px; text-decoration-color:rgba(0,0,0,.35);
+  transition:color .15s ease, text-decoration-color .15s ease; overflow-wrap:anywhere;
+}
+.footer-cta:hover, .footer-cta:focus-visible{color:var(--accent); text-decoration-color:var(--accent);}
+.footer-cursor{
+  position:absolute; left:calc(100% - 6px); top:48%; width:clamp(36px, 10vw, 66px); height:auto; pointer-events:none;
+  filter:drop-shadow(0 8px 8px rgba(0,0,0,.22)); animation:footer-cursor-nudge 2.6s ease-in-out infinite;
+}
+@keyframes footer-cursor-nudge{0%,100%{transform:translate(0,0);} 50%{transform:translate(-7px,-7px);}}
+@media (prefers-reduced-motion: reduce){.footer-cursor{animation:none;}}
+@media (min-width: 721px){
+  .footer-title .line{display:block;}
+  .footer-title{font-size:clamp(3.4rem, 7.4vw, 6.2rem);}
+}
+@media (max-width: 720px){
+  .footer{padding:72px 20px 72px;}
+  .footer-sub{margin-top:32px;}
+}
 
 /* About page layout */
 .about-hero{padding:48px 0;}
@@ -268,7 +297,7 @@ body{
 
 /* ---------- Case study page (Laden-Sojudi inspired) ---------- */
 html{scroll-behavior:smooth;}
-.cs-page main{padding:0px 30px 80px 30px;}
+.cs-page main{padding:0px 30px 0px 30px;}
 .cs-back{display:inline-block; margin:24px 0 28px; color:var(--muted); text-decoration:none; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.2em;}
 .cs-back:hover{color:var(--accent);}
 
