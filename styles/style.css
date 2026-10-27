@@ -163,8 +163,6 @@ body{
   font-size:clamp(2.2rem, 10.5vw, 5.2rem); line-height:.96; letter-spacing:-.045em; text-wrap:balance; color:#0b0b0f;
 }
 .footer-title .line{display:inline}
-.footer-title .nw{white-space:nowrap}
-.footer-peace{display:inline-block; height:1.18em; width:auto; vertical-align:-.12em; margin-left:.1em; transform:rotate(5deg); transform-origin:50% 90%;}
 .footer-sub{margin:44px 0 6px; font-size:clamp(16px, 4.2vw, 20px); font-weight:300; color:#222;}
 .footer-mail{position:relative; display:inline-block; max-width:100%;}
 .footer-cta{
@@ -173,12 +171,6 @@ body{
   transition:color .15s ease, text-decoration-color .15s ease; overflow-wrap:anywhere;
 }
 .footer-cta:hover, .footer-cta:focus-visible{color:var(--accent); text-decoration-color:var(--accent);}
-.footer-cursor{
-  position:absolute; left:calc(100% - 6px); top:48%; width:clamp(36px, 10vw, 66px); height:auto; pointer-events:none;
-  filter:drop-shadow(0 8px 8px rgba(0,0,0,.22)); animation:footer-cursor-nudge 2.6s ease-in-out infinite;
-}
-@keyframes footer-cursor-nudge{0%,100%{transform:translate(0,0);} 50%{transform:translate(-7px,-7px);}}
-@media (prefers-reduced-motion: reduce){.footer-cursor{animation:none;}}
 @media (min-width: 721px){
   .footer-title .line{display:block;}
   .footer-title{font-size:clamp(3.4rem, 7.4vw, 6.2rem);}
