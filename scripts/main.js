@@ -89,14 +89,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Turn the navbar into a floating rounded pill once the page is scrolled.
-  // Only on larger screens: on phones the top bar is not pinned, it just scrolls away with the page.
+  // Turn the navbar into a floating rounded pill once the page is scrolled
   const siteHeader = document.querySelector('.site-header');
   if (siteHeader) {
-    const pinnedHeaderQuery = window.matchMedia('(min-width: 721px)');
     let headerTicking = false;
     function updateHeaderScrollState() {
-      siteHeader.classList.toggle('is-scrolled', pinnedHeaderQuery.matches && window.scrollY > 10);
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > 10);
       headerTicking = false;
     }
     function onHeaderScroll() {
@@ -106,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     updateHeaderScrollState();
     window.addEventListener('scroll', onHeaderScroll, { passive: true });
-    window.addEventListener('resize', updateHeaderScrollState);
   }
 
   // Start horizontally-scrolling project rows centered, so users can scroll either direction
