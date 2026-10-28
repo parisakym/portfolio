@@ -23,9 +23,6 @@
     .rs-name .dot{color:var(--accent);}
     .rs-role{margin:16px 0 0; font-size:clamp(1.05rem, 2.4vw, 1.3rem); font-weight:400; color:var(--rs-soft);}
     .rs-summary{margin:34px 0 0; max-width:780px; font-size:clamp(1rem, 2vw, 1.15rem); line-height:1.75; color:#222;}
-    .rs-links{list-style:none; margin:34px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:10px 28px;}
-    .rs-links a{color:#111; font-size:15px; font-weight:600; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; text-decoration-color:rgba(0,0,0,.3); transition:color .15s ease, text-decoration-color .15s ease;}
-    .rs-links a:hover{color:var(--accent); text-decoration-color:var(--accent);}
 
     .rs-sec{padding:0 0 88px;}
     .rs-sec .rs-h{margin-bottom:34px;}
@@ -49,6 +46,10 @@
     /* Skills as a tidy line of items */
     .rs-tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 0; font-size:16px; color:var(--rs-soft);}
     .rs-tags li + li::before{content:"·"; margin:0 12px; color:rgba(0,0,0,.35);}
+    /* Skills: title on the left, every skill on a single line to its right */
+    .rs-row-skills{grid-template-columns:minmax(0,150px) minmax(0,1fr); gap:10px 24px; align-items:baseline;}
+    .rs-row-skills .rs-tags{flex-wrap:nowrap; white-space:nowrap; font-size:15px;}
+    .rs-row-skills .rs-tags li + li::before{margin:0 10px;}
 
     .rs-date{font-size:14px; color:var(--rs-soft); margin-top:6px;}
 
@@ -65,12 +66,16 @@
     .tl-label .rs-t{font-weight:500;}
     .tl-label .rs-date{margin-top:8px;}
 
+    @media (max-width:1100px){
+      .rs-row-skills .rs-tags{flex-wrap:wrap; white-space:normal; gap:6px 20px;}
+      .rs-row-skills .rs-tags li + li::before{display:none;}
+    }
+
     @media (max-width:760px){
       .rs-page{padding:18px 20px 0;}
       .rs-hero{padding:48px 0 44px;}
       .rs-sec{padding-bottom:60px;}
-      .rs-row{grid-template-columns:1fr; gap:6px; padding:24px 0;}
-      .rs-row .rs-side{order:-1;}
+      .rs-row, .rs-row-skills{grid-template-columns:1fr; gap:6px; padding:24px 0;}
       .tl::before{left:23.5px; transform:none;}
       .tl-entry{grid-template-columns:48px minmax(0,1fr); column-gap:18px; row-gap:10px; padding-bottom:48px;}
       .tl-icon{grid-column:1; grid-row:1 / span 2;}
@@ -90,9 +95,7 @@
       .rs-name{font-size:34px;}
       .rs-role{font-size:14px; margin-top:6px;}
       .rs-summary{margin-top:14px; font-size:12px; line-height:1.55;}
-      .rs-links{margin-top:12px;}
-      .rs-links a{font-size:11.5px;}
-      .rs-sec{padding-bottom:20px;}
+          .rs-sec{padding-bottom:20px;}
       .rs-sec .rs-h{font-size:20px; margin-bottom:10px;}
       .rs-row{padding:12px 0; gap:6px 28px; break-inside:avoid;}
       .rs-t{font-size:13px;} .rs-sub, .rs-date, .rs-year{font-size:11px;}
@@ -134,9 +137,6 @@
       <h1 class="rs-name">Parisa Khayami<span class="dot">.</span></h1>
       <p class="rs-role">UX/UI Designer - Graphic Designer</p>
       <p class="rs-summary">User-centered UX/UI designer with experience designing web and SaaS interfaces across B2B, food, entertainment and retail domains. I blend research-driven insights with visual design and prototyping to deliver clear, usable, and accessible product experiences. Skilled at leading discovery, creating wireframes and high-fidelity prototypes in Figma, and collaborating closely with engineers and stakeholders to ship valuable features.</p>
-      <ul class="rs-links">
-        <li><a href="https://www.linkedin.com/in/parisakym" target="_blank" rel="noopener">linkedin.com/in/parisakym</a></li>
-      </ul>
     </header>
 
 
@@ -228,7 +228,7 @@
 
     <section class="rs-sec" id="skills">
       <h2 class="rs-h">Skills<span class="dot">.</span></h2>
-      <article class="rs-row">
+      <article class="rs-row rs-row-skills">
         <div class="rs-main"><h3 class="rs-t">UX/UI Design</h3></div>
         <div class="rs-side">
           <ul class="rs-tags">
@@ -236,7 +236,7 @@
           </ul>
         </div>
       </article>
-      <article class="rs-row">
+      <article class="rs-row rs-row-skills">
         <div class="rs-main"><h3 class="rs-t">Soft Skills</h3></div>
         <div class="rs-side">
           <ul class="rs-tags">
