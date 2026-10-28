@@ -480,3 +480,8 @@ body.cs-lightbox-open{overflow:hidden;}
   .big-name{text-align:center;}
   .role{margin-top:8px; text-align:center;}
 }
+
+/* Phones (portrait or landscape): keep room under the hero text for the "Scroll" indicator so they never overlap */
+@media (max-width: 720px), (max-width: 980px) and (max-height: 700px){
+  .hero{padding-bottom:112px;}
+}
