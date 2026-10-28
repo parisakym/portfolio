@@ -67,6 +67,10 @@ body{
 .logo img{width:100%; height:100%; object-fit:contain;}
 .brand-text .brand-name{font-weight:700;}
 .brand-sub{font-size:13px; color:var(--muted); margin-top:-4px;}
+/* Very small screens (narrower than 320px): smaller name in the top bar */
+@media (max-width: 319px){
+  .brand-name{font-size:13px;}
+}
 .nav{display:flex; gap:20px; align-items:center;}
 .nav-link{color:#333; text-decoration:none; font-weight:500;}
 .nav-link.active{color:var(--accent);}
