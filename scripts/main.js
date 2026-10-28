@@ -41,6 +41,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // "Contact" jumps to this page's own footer. Lazy images above it load as you go and push the
+  // footer down, so load them first and re-align as they arrive (until the visitor scrolls themselves).
+  document.querySelectorAll('a[href="#contact"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.getElementById('contact');
+      if (!target) return;
+      e.preventDefault();
+      history.replaceState(null, '', '#contact');
+
+      let userScrolled = false;
+      const stop = () => { userScrolled = true; };
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => window.addEventListener(ev, stop, { once: true, passive: true }));
+      setTimeout(() => { userScrolled = true; }, 6000);
+
+      const align = () => {
+        if (userScrolled) return;
+        const block = target.getBoundingClientRect().height > window.innerHeight ? 'start' : 'end';
+        target.scrollIntoView({ behavior: 'instant', block });
+      };
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.loading = 'eager';
+        if (!img.complete) img.addEventListener('load', align, { once: true });
+      });
+      align();
+    });
+  });
+
   // Close mobile menu when clicking outside it (on the blurred backdrop)
   document.addEventListener('click', (e) => {
     if (!document.body.classList.contains('mobile-nav-open')) return;
