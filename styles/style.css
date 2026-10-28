@@ -407,7 +407,7 @@ html{scroll-behavior:smooth;}
 .cs-more{padding-top:56px; margin-top:16px; border-top:1px solid rgba(0,0,0,0.06);}
 .cs-more-label{font-size:12px; text-transform:uppercase; letter-spacing:.25em; color:var(--muted); font-weight:600; margin:0 0 24px;}
 .cs-more-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
-.cs-more-card{display:block; text-decoration:none; color:inherit; padding:20px; background:#e3e3e352; border-radius:16px; border:1px solid rgba(0,0,0,0.06);}
+.cs-more-card{display:block; text-decoration:none; color:inherit;}
 .cs-more-thumb{border-radius:16px; overflow:hidden; background:var(--card); margin-bottom:18px; aspect-ratio:16/10.5; transition:transform .2s ease, box-shadow .2s ease;}
 .cs-more-thumb img{width:100%; height:100%; object-fit:cover; display:block; border:1px solid rgba(201, 201, 201, 0.83); border-radius:16px;}
 .cs-more-card:hover .cs-more-thumb{transform:translateY(-4px); box-shadow:0 16px 32px -18px rgba(0,0,0,0.25);}
