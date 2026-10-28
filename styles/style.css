@@ -163,21 +163,20 @@ body{
   font-size:clamp(2.2rem, 10.5vw, 5.2rem); line-height:.96; letter-spacing:-.045em; text-wrap:balance; color:#0b0b0f;
 }
 .footer-title .line{display:inline}
-.footer-sub{margin:44px 0 6px; font-size:clamp(16px, 4.2vw, 20px); font-weight:300; color:#222;}
-.footer-mail{position:relative; display:inline-block; max-width:100%;}
-.footer-cta{
-  display:inline-block; color:#111; font-weight:600; font-size:clamp(16px, 4.6vw, 22px); letter-spacing:.005em;
-  text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:6px; text-decoration-color:rgba(0,0,0,.35);
-  transition:color .15s ease, text-decoration-color .15s ease; overflow-wrap:anywhere;
+.footer-btn{
+  display:inline-block; margin-top:44px; padding:17px 44px; line-height:1.2; border-radius:999px;
+  background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:17px; letter-spacing:.01em;
+  transition:opacity .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-.footer-cta:hover, .footer-cta:focus-visible{color:var(--accent); text-decoration-color:var(--accent);}
+.footer-btn:hover, .footer-btn:focus-visible{opacity:.92; transform:translateY(-2px); box-shadow:0 8px 20px rgba(168,58,74,.28);}
+.footer-btn:active{transform:translateY(0);}
 @media (min-width: 721px){
   .footer-title .line{display:block;}
   .footer-title{font-size:clamp(3.4rem, 7.4vw, 6.2rem);}
 }
 @media (max-width: 720px){
   .footer{padding:72px 20px 72px;}
-  .footer-sub{margin-top:32px;}
+  .footer-btn{margin-top:32px;}
 }
 
 /* About page layout */
