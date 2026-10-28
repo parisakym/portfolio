@@ -57,9 +57,9 @@
     /* Experience timeline: centre line, square icons, details alternate left / right */
     .tl{position:relative; padding:6px 0 0;}
     .tl{--tl-line:#d6d6d6; --tl-ink:#000;}
-    .tl::before, .tl::after{content:""; position:absolute; top:0; left:50%; width:2px; transform:translateX(-1px);}
-    .tl::before{bottom:0; background:var(--tl-line);}                                   /* grey track */
-    .tl::after{height:var(--tl-fill,0px); max-height:100%; background:var(--tl-ink); z-index:0;}  /* black fill that follows the scroll */
+    .tl::before, .tl::after{content:""; position:absolute; top:var(--tl-start,30px); left:50%; width:2px; transform:translateX(-1px);}
+    .tl::before{height:var(--tl-length,0px); background:var(--tl-line);}                                          /* grey track: first circle to last circle */
+    .tl::after{height:var(--tl-fill,0px); max-height:var(--tl-length,0px); background:var(--tl-ink); z-index:0;}  /* black fill that follows the scroll */
     .tl-entry{position:relative; display:grid; grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr); column-gap:44px; align-items:start; padding-bottom:64px;}
     .tl-entry:last-child{padding-bottom:0;}
     .tl-icon{order:2; position:relative; z-index:1; width:48px; height:48px; display:grid; place-items:center; line-height:0; color:#c4c4c4; transition:color .3s ease;}
@@ -311,7 +311,14 @@
         ticking = false;
         var marker = window.innerHeight * 0.5;                    // the "reading line": middle of the screen
         var box = tl.getBoundingClientRect();
-        var fill = Math.max(0, Math.min(box.height, marker - box.top));
+        // the line runs from the centre of the first circle to the centre of the last circle
+        var first = entries[0].querySelector('.tl-icon').getBoundingClientRect();
+        var last = entries[entries.length - 1].querySelector('.tl-icon').getBoundingClientRect();
+        var start = first.top + first.height / 2 - box.top;
+        var length = Math.max(0, (last.top + last.height / 2) - (first.top + first.height / 2));
+        var fill = Math.max(0, Math.min(length, marker - (box.top + start)));
+        tl.style.setProperty('--tl-start', start + 'px');
+        tl.style.setProperty('--tl-length', length + 'px');
         tl.style.setProperty('--tl-fill', fill + 'px');
         entries.forEach(function (entry) {
           var icon = entry.querySelector('.tl-icon').getBoundingClientRect();
