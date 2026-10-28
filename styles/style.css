@@ -155,8 +155,8 @@ body{
 .footer{
   position:relative; text-align:center; scroll-margin-top:0; margin-top:56px;
   padding:112px 24px 104px; color:#111; background:#ffffff;
-  /* box-shadow:0 0 0 100vmax #fffdf0; */
-  clip-path:inset(0 -100vmax);
+  /* paint the band edge-to-edge even though the footer sits inside a max-width container */
+  box-shadow:0 0 0 100vmax #ffffff; clip-path:inset(0 -100vmax);
 }
 .footer-title{
   margin:0 auto; font-family:var(--font-display); font-weight:800; text-transform:uppercase;
@@ -172,7 +172,7 @@ body{
 .footer-btn:active{transform:translateY(0);}
 @media (min-width: 721px){
   .footer-title .line{display:block;}
-  .footer-title{font-size:clamp(3.4rem, 7.4vw, 6.2rem);}
+  .footer-title{font-size:clamp(3.4rem, 7.4vw, 5.5rem);}
 }
 @media (max-width: 720px){
   .footer{padding:72px 20px 72px;}
