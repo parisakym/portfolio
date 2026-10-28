@@ -163,20 +163,24 @@ body{
   font-size:clamp(2.2rem, 10.5vw, 5.2rem); line-height:.96; letter-spacing:-.045em; text-wrap:balance; color:#0b0b0f;
 }
 .footer-title .line{display:inline}
+.footer-actions{display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:44px;}
 .footer-btn{
-  display:inline-block; margin-top:44px; padding:17px 44px; line-height:1.2; border-radius:999px;
+  display:inline-block; padding:17px 44px; line-height:1.2; border-radius:999px; border:1.5px solid var(--accent);
   background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:17px; letter-spacing:.01em;
   transition:opacity .15s ease, transform .15s ease, box-shadow .15s ease;
 }
 .footer-btn:hover, .footer-btn:focus-visible{opacity:.92; transform:translateY(-2px); box-shadow:0 8px 20px rgba(168,58,74,.28);}
 .footer-btn:active{transform:translateY(0);}
+/* Secondary button (LinkedIn): outlined, takes the footer's text colour */
+.footer-btn-ghost{background:transparent; color:inherit; border-color:currentColor;}
 @media (min-width: 721px){
   .footer-title .line{display:block;}
   .footer-title{font-size:clamp(3.4rem, 7.4vw, 5.5rem);}
 }
 @media (max-width: 720px){
   .footer{padding:72px 20px 72px;}
-  .footer-btn{margin-top:32px;}
+  .footer-actions{margin-top:32px; gap:10px;}
+  .footer-btn{padding:15px 26px; font-size:16px;}
 }
 
 /* About page layout */
