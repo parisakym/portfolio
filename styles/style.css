@@ -468,3 +468,10 @@ html{scroll-behavior:smooth;}
 }
 .cs-lightbox-close:hover{background:rgba(255,255,255,0.24);}
 body.cs-lightbox-open{overflow:hidden;}
+
+/* Home hero on small phones (425px and narrower): name, last name and role stacked and centred */
+@media (max-width: 425px){
+  .lastname{flex-direction:column; align-items:center; gap:0;}
+  .big-name{text-align:center;}
+  .role{margin-top:8px; text-align:center;}
+}
