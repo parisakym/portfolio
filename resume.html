@@ -45,12 +45,12 @@
 
     /* Skills as a tidy line of items */
     .rs-tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 0; font-size:16px; color:var(--rs-soft);}
-    .rs-tags li + li::before{content:"·"; margin:0 12px; color:rgba(0,0,0,.35);}
+    .rs-tags li{position:relative; padding-left:20px;}
+    .rs-tags li::before{content:"·"; position:absolute; left:0; width:20px; text-align:center; color:rgba(0,0,0,.35);}
     /* Skills: title on the left, every skill on a single line to its right */
     .rs-row-skills{grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:10px 32px; align-items:baseline;}
-    .rs-skill-text{margin:0; font-size:16px; line-height:1.65; color:var(--rs-soft);}
-    .rs-row-skills .rs-tags{flex-wrap:nowrap; white-space:nowrap; font-size:15px;}
-    .rs-row-skills .rs-tags li + li::before{margin:0 10px;}
+    .rs-row-skills .rs-side{overflow:hidden;}
+    .rs-row-skills .rs-tags{margin-left:-20px; font-size:15px;}
 
     .rs-date{font-size:14px; color:var(--rs-soft); margin-top:6px;}
 
@@ -66,11 +66,6 @@
     .tl-entry:nth-child(even) .tl-label{order:1; text-align:right;}
     .tl-label .rs-t{font-weight:500;}
     .tl-label .rs-date{margin-top:8px;}
-
-    @media (max-width:1100px){
-      .rs-row-skills .rs-tags{flex-wrap:wrap; white-space:normal; gap:6px 20px;}
-      .rs-row-skills .rs-tags li + li::before{display:none;}
-    }
 
     @media (max-width:760px){
       .rs-page{padding:18px 20px 0;}
@@ -232,19 +227,25 @@
       <article class="rs-row rs-row-skills">
         <div class="rs-main"><h3 class="rs-t">UX Research</h3></div>
         <div class="rs-side">
-          <p class="rs-skill-text">User interviews, usability testing, user testing, competitive analysis, affinity mapping, user personas, customer journey mapping, desktop research, survey, heuristic evaluation</p>
+          <ul class="rs-tags">
+            <li>User Interviews</li><li>Usability Testing</li><li>User Testing</li><li>Competitive Analysis</li><li>Affinity Mapping</li><li>User Personas</li><li>Customer Journey Mapping</li><li>Desktop Research</li><li>Survey</li><li>Heuristic Evaluation</li>
+          </ul>
         </div>
       </article>
       <article class="rs-row rs-row-skills">
         <div class="rs-main"><h3 class="rs-t">Strategic Design</h3></div>
         <div class="rs-side">
-          <p class="rs-skill-text">Design system, accessibility, user-centered design (UCD), user flows, high/low fidelity design, information architecture (IA), wireframing, prototyping</p>
+          <ul class="rs-tags">
+            <li>Design System</li><li>Accessibility</li><li>User-Centered Design (UCD)</li><li>User Flows</li><li>High/Low Fidelity Design</li><li>Information Architecture (IA)</li><li>Wireframing</li><li>Prototyping</li>
+          </ul>
         </div>
       </article>
       <article class="rs-row rs-row-skills">
         <div class="rs-main"><h3 class="rs-t">Tools</h3></div>
         <div class="rs-side">
-          <p class="rs-skill-text">Figma, Adobe Creative Suite, WordPress, Lovable, Framer, Cursor, Claude Design, HTML, CSS, Notion</p>
+          <ul class="rs-tags">
+            <li>Figma</li><li>Adobe Creative Suite</li><li>WordPress</li><li>Lovable</li><li>Framer</li><li>Cursor</li><li>Claude Design</li><li>HTML</li><li>CSS</li><li>Notion</li>
+          </ul>
         </div>
       </article>
       <article class="rs-row rs-row-skills">
