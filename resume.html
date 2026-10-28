@@ -85,8 +85,8 @@
       .rs-edu-grid .rs-edu:last-child{border-bottom:0;}
     }
 
-    /* Very small screens (narrower than 320px): no timeline line or circles, text uses the full width */
-    @media (max-width:319px){
+    /* Very small screens (320px wide and narrower): no timeline line or circles, text uses the full width */
+    @media (max-width:320px){
       .tl::before, .tl::after{display:none;}
       .tl-icon{display:none;}
       .tl-entry{grid-template-columns:minmax(0,1fr); column-gap:0;}
