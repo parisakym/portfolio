@@ -232,9 +232,9 @@ body{
 
 /* Mobile nav + stacked layouts */
 @media (max-width: 720px){
+  /* Phones: the top bar is not pinned, it scrolls away with the page */
+  .site-header{position:absolute;}
   .header-row{padding:14px 20px;}
-  .site-header.is-scrolled{padding:10px 10px 0;}
-  .site-header.is-scrolled .header-row{padding:4px 40px; border-radius:999px;}
   .hamburger{display:block;}
 
   .nav{
