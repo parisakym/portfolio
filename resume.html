@@ -85,6 +85,14 @@
       .rs-edu-grid .rs-edu:last-child{border-bottom:0;}
     }
 
+    /* Very small screens (narrower than 320px): no timeline line or circles, text uses the full width */
+    @media (max-width:319px){
+      .tl::before, .tl::after{display:none;}
+      .tl-icon{display:none;}
+      .tl-entry{grid-template-columns:minmax(0,1fr); column-gap:0;}
+      .tl-label, .tl-entry:nth-child(even) .tl-label, .tl-content, .tl-entry:nth-child(even) .tl-content{grid-column:1;}
+    }
+
     @media print{
       @page{size:A4; margin:12mm;}
       html, body{background:#fff !important;}
