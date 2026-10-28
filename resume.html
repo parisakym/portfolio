@@ -47,7 +47,8 @@
     .rs-tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 0; font-size:16px; color:var(--rs-soft);}
     .rs-tags li + li::before{content:"·"; margin:0 12px; color:rgba(0,0,0,.35);}
     /* Skills: title on the left, every skill on a single line to its right */
-    .rs-row-skills{grid-template-columns:minmax(0,150px) minmax(0,1fr); gap:10px 24px; align-items:baseline;}
+    .rs-row-skills{grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:10px 32px; align-items:baseline;}
+    .rs-skill-text{margin:0; font-size:16px; line-height:1.65; color:var(--rs-soft);}
     .rs-row-skills .rs-tags{flex-wrap:nowrap; white-space:nowrap; font-size:15px;}
     .rs-row-skills .rs-tags li + li::before{margin:0 10px;}
 
@@ -229,11 +230,21 @@
     <section class="rs-sec" id="skills">
       <h2 class="rs-h">Skills<span class="dot">.</span></h2>
       <article class="rs-row rs-row-skills">
-        <div class="rs-main"><h3 class="rs-t">UX/UI Design</h3></div>
+        <div class="rs-main"><h3 class="rs-t">UX Research</h3></div>
         <div class="rs-side">
-          <ul class="rs-tags">
-            <li>Figma</li><li>HTML5, CSS</li><li>Prototyping</li><li>Wireframing</li><li>User Flow</li><li>User research</li><li>Adobe Suite</li><li>Claude Design</li>
-          </ul>
+          <p class="rs-skill-text">User interviews, usability testing, user testing, competitive analysis, affinity mapping, user personas, customer journey mapping, desktop research, survey, heuristic evaluation</p>
+        </div>
+      </article>
+      <article class="rs-row rs-row-skills">
+        <div class="rs-main"><h3 class="rs-t">Strategic Design</h3></div>
+        <div class="rs-side">
+          <p class="rs-skill-text">Design system, accessibility, user-centered design (UCD), user flows, high/low fidelity design, information architecture (IA), wireframing, prototyping</p>
+        </div>
+      </article>
+      <article class="rs-row rs-row-skills">
+        <div class="rs-main"><h3 class="rs-t">Tools</h3></div>
+        <div class="rs-side">
+          <p class="rs-skill-text">Figma, Adobe Creative Suite, WordPress, Lovable, Framer, Cursor, Claude Design, HTML, CSS, Notion</p>
         </div>
       </article>
       <article class="rs-row rs-row-skills">
