@@ -50,20 +50,30 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       history.replaceState(null, '', '#contact');
 
-      let userScrolled = false;
-      const stop = () => { userScrolled = true; };
-      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => window.addEventListener(ev, stop, { once: true, passive: true }));
-      setTimeout(() => { userScrolled = true; }, 6000);
+      const startedAt = performance.now();
+      let done = false;
+      const userEvents = ['wheel', 'touchmove', 'keydown', 'mousedown'];
+      const finish = () => {
+        if (done) return;
+        done = true;
+        resizeWatcher.disconnect();
+        userEvents.forEach(ev => window.removeEventListener(ev, onUser));
+      };
+      // Any real scroll attempt hands control back — but ignore trackpad momentum from right before the click
+      const onUser = () => { if (performance.now() - startedAt > 700) finish(); };
+      userEvents.forEach(ev => window.addEventListener(ev, onUser, { passive: true }));
 
       const align = () => {
-        if (userScrolled) return;
+        if (done) return;
         const block = target.getBoundingClientRect().height > window.innerHeight ? 'start' : 'end';
         target.scrollIntoView({ behavior: 'instant', block });
       };
-      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        img.loading = 'eager';
-        if (!img.complete) img.addEventListener('load', align, { once: true });
-      });
+      // Keep the footer in view for as long as the page keeps growing (images arriving on slow connections)
+      const resizeWatcher = new ResizeObserver(align);
+      resizeWatcher.observe(document.documentElement);
+      setTimeout(finish, 30000);
+
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
       align();
     });
   });
