@@ -20,6 +20,12 @@
     .nav-link{color:#fff;}
     .nav-link.active{color:var(--accent);}
     .hamburger span{background:#fff;}
+    /* Small screens: the slide-out menu is dark too, so its white links stay readable */
+    @media (max-width:720px){
+      .nav{background:#0b0b0f; box-shadow:-8px 0 24px rgba(0,0,0,.55);}
+      .nav-link{border-bottom-color:rgba(255,255,255,.14);}
+      .nav-link.active{color:#e58a99;}
+    }
     .cs-tags-row span{background:rgba(22,22,22,0.7); color:#fff;}
     .cs-hero-sub{color:rgba(255,255,255,.65);}
     .cs-role p{color:rgba(255,255,255,.75);}
