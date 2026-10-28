@@ -56,10 +56,14 @@
 
     /* Experience timeline: centre line, square icons, details alternate left / right */
     .tl{position:relative; padding:6px 0 0;}
-    .tl::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:1px; background:var(--rs-line); transform:translateX(-.5px);}
+    .tl{--tl-line:#d6d6d6; --tl-ink:#000;}
+    .tl::before, .tl::after{content:""; position:absolute; top:0; left:50%; width:2px; transform:translateX(-1px);}
+    .tl::before{bottom:0; background:var(--tl-line);}                                   /* grey track */
+    .tl::after{height:var(--tl-fill,0px); max-height:100%; background:var(--tl-ink); z-index:0;}  /* black fill that follows the scroll */
     .tl-entry{position:relative; display:grid; grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr); column-gap:44px; align-items:start; padding-bottom:64px;}
     .tl-entry:last-child{padding-bottom:0;}
-    .tl-icon{order:2; position:relative; z-index:1; width:48px; height:48px; display:grid; place-items:center; line-height:0;}
+    .tl-icon{order:2; position:relative; z-index:1; width:48px; height:48px; display:grid; place-items:center; line-height:0; color:#c4c4c4; transition:color .3s ease;}
+    .tl-entry.is-active .tl-icon{color:var(--tl-ink);}
     .tl-content{order:1;}
     .tl-label{order:3; padding-top:2px;}
     .tl-entry:nth-child(even) .tl-content{order:3;}
@@ -72,7 +76,7 @@
       .rs-hero{padding:48px 0 44px;}
       .rs-sec{padding-bottom:60px;}
       .rs-row, .rs-row-skills{grid-template-columns:1fr; gap:6px; padding:24px 0;}
-      .tl::before{left:23.5px; transform:none;}
+      .tl::before, .tl::after{left:23px; transform:none;}
       .tl-entry{grid-template-columns:48px minmax(0,1fr); column-gap:18px; row-gap:10px; padding-bottom:48px;}
       .tl-icon{grid-column:1; grid-row:1 / span 2;}
       .tl-label, .tl-entry:nth-child(even) .tl-label{order:0; grid-column:2; grid-row:1; text-align:left;}
@@ -96,7 +100,7 @@
       .rs-row{padding:12px 0; gap:6px 28px; break-inside:avoid;}
       .rs-t{font-size:13px;} .rs-sub, .rs-date, .rs-year{font-size:11px;}
       .rs-lines{margin-top:6px;} .rs-lines p{font-size:11.5px; line-height:1.5; margin-bottom:5px;}
-      .tl-entry{padding-bottom:16px; break-inside:avoid;} .tl-icon{display:none;} .tl::before{display:none;}
+      .tl-entry{padding-bottom:16px; break-inside:avoid;} .tl-icon{display:none;} .tl::before, .tl::after{display:none;}
       .tl-entry, .tl-entry:nth-child(even){grid-template-columns:1fr 1fr; column-gap:28px;}
       .rs-edu{padding:10px 0; break-inside:avoid;} .rs-tags{font-size:11.5px;}
     }
@@ -164,7 +168,7 @@
             <p>Conducted user research and usability testing to inform UI/UX design decisions and improve product experience.</p>
           </div>
         </div>
-        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="#2e2e2e" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="#2e2e2e"/></svg></span>
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
           <h3 class="rs-t">Smart Skin Technologies</h3>
           <p class="rs-sub">Fredericton, NB</p>
@@ -180,7 +184,7 @@
             <p>Edited and retouched photos to support visual design and marketing materials.</p>
           </div>
         </div>
-        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="#2e2e2e" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="#2e2e2e"/></svg></span>
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
           <h3 class="rs-t">Miscellaneum Studios</h3>
           <p class="rs-sub">Montréal, QC</p>
@@ -196,7 +200,7 @@
             <p>Applied user research to enhance UX aimed at improving sales and maintained WordPress site (www.paintmarkersource.com).</p>
           </div>
         </div>
-        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="#2e2e2e" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="#2e2e2e"/></svg></span>
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
           <h3 class="rs-t">Carmel Industries</h3>
           <p class="rs-sub">Montréal, QC</p>
@@ -212,7 +216,7 @@
             <p>Provided sales and marketing support, including customer service and content updates to improve customer experience.</p>
           </div>
         </div>
-        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="#2e2e2e" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="#2e2e2e"/></svg></span>
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
           <h3 class="rs-t">Asept-Air Co</h3>
           <p class="rs-sub">Montréal, QC</p>
@@ -295,6 +299,32 @@
     </footer>
   </main>
 
+  <script>
+    /* Experience timeline: the line fills black from the top down to the middle of the screen as you scroll,
+       and each circle turns from grey to black once the fill reaches it. */
+    (function () {
+      var tl = document.querySelector('.tl');
+      if (!tl) return;
+      var entries = Array.prototype.slice.call(tl.querySelectorAll('.tl-entry'));
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var marker = window.innerHeight * 0.5;                    // the "reading line": middle of the screen
+        var box = tl.getBoundingClientRect();
+        var fill = Math.max(0, Math.min(box.height, marker - box.top));
+        tl.style.setProperty('--tl-fill', fill + 'px');
+        entries.forEach(function (entry) {
+          var icon = entry.querySelector('.tl-icon').getBoundingClientRect();
+          entry.classList.toggle('is-active', icon.top + icon.height / 2 <= marker);
+        });
+      }
+      function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      window.addEventListener('scroll', request, { passive: true });
+      window.addEventListener('resize', request);
+      window.addEventListener('load', request);
+      update();
+    })();
+  </script>
   <script src="scripts/main.js?v=20261029g"></script>
 </body>
 </html>
