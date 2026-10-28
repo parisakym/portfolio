@@ -59,13 +59,13 @@
     .tl::after{height:var(--tl-fill,0px); max-height:var(--tl-length,0px); background:var(--tl-ink); z-index:0;}  /* black fill that follows the scroll */
     .tl-entry{position:relative; display:grid; grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr); column-gap:44px; align-items:start; padding-bottom:64px;}
     .tl-entry:last-child{padding-bottom:0;}
-    .tl-icon{order:2; position:relative; z-index:1; width:48px; height:48px; display:grid; place-items:center; line-height:0; color:#c4c4c4; transition:color .3s ease;}
+    .tl-icon{grid-column:2; grid-row:1; position:relative; z-index:1; width:48px; height:48px; display:grid; place-items:center; line-height:0; color:#c4c4c4; transition:color .3s ease;}
     .tl-entry.is-active .tl-icon{color:var(--tl-ink);}
-    .tl-content{order:1;}
-    .tl-label{order:3; padding-top:2px;}
-    .tl-entry:nth-child(even) .tl-content{order:3;}
-    .tl-entry:nth-child(even) .tl-label{order:1; text-align:right;}
-    .tl-label .rs-t{font-weight:500;}
+    .tl-label{grid-column:3; grid-row:1; padding-top:2px;}                         /* job title + workplace + place + dates, beside the circle */
+    .tl-entry:nth-child(even) .tl-label{grid-column:1; text-align:right;}          /* every other job sits on the left */
+    .tl-label .tl-role{margin:0; font-size:18px; font-weight:600; line-height:1.35; color:#111;}
+    .tl-label .tl-company{margin:3px 0 0; font-size:16px; font-weight:500; line-height:1.4; color:#111;}
+    .tl-label .rs-sub{margin-top:2px;}
     .tl-label .rs-date{margin-top:8px;}
 
     @media (max-width:760px){
@@ -75,9 +75,8 @@
       .rs-row, .rs-row-skills{grid-template-columns:1fr; gap:6px; padding:24px 0;}
       .tl::before, .tl::after{left:23px; transform:none;}
       .tl-entry{grid-template-columns:48px minmax(0,1fr); column-gap:18px; row-gap:10px; padding-bottom:48px;}
-      .tl-icon{grid-column:1; grid-row:1 / span 2;}
-      .tl-label, .tl-entry:nth-child(even) .tl-label{order:0; grid-column:2; grid-row:1; text-align:left;}
-      .tl-content, .tl-entry:nth-child(even) .tl-content{order:0; grid-column:2; grid-row:2;}
+      .tl-icon{grid-column:1; grid-row:1;}
+      .tl-label, .tl-entry:nth-child(even) .tl-label{grid-column:2; grid-row:1; text-align:left;}
       .rs-edu-grid{grid-template-columns:1fr;}
       .rs-edu-grid .rs-edu:last-child{border-bottom:0;}
     }
@@ -87,7 +86,7 @@
       .tl::before, .tl::after{display:none;}
       .tl-icon{display:none;}
       .tl-entry{grid-template-columns:minmax(0,1fr); column-gap:0;}
-      .tl-label, .tl-entry:nth-child(even) .tl-label, .tl-content, .tl-entry:nth-child(even) .tl-content{grid-column:1;}
+      .tl-label, .tl-entry:nth-child(even) .tl-label{grid-column:1;}
     }
 
     @media print{
@@ -105,7 +104,8 @@
       .rs-row{padding:12px 0; gap:6px 28px; break-inside:avoid;}
       .rs-t{font-size:13px;} .rs-sub, .rs-date, .rs-year{font-size:11px;}
         .tl-entry{padding-bottom:16px; break-inside:avoid;} .tl-icon{display:none;} .tl::before, .tl::after{display:none;}
-      .tl-entry, .tl-entry:nth-child(even){grid-template-columns:1fr 1fr; column-gap:28px;}
+      .tl-entry, .tl-entry:nth-child(even){grid-template-columns:1fr; column-gap:0;}
+      .tl-label, .tl-entry:nth-child(even) .tl-label{grid-column:1; text-align:left;}
       .rs-edu{padding:10px 0; break-inside:avoid;} .rs-tags{font-size:11.5px;}
     }
   </style>
@@ -164,45 +164,37 @@
       <h2 class="rs-h">Experience<span class="dot">.</span></h2>
       <div class="tl">
       <article class="tl-entry">
-        <div class="tl-content">
-          <h3 class="rs-t">UX/UI Designer</h3>
-        </div>
         <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
-          <h3 class="rs-t">Smart Skin Technologies</h3>
+          <h3 class="rs-t tl-role">UX/UI Designer</h3>
+          <p class="tl-company">Smart Skin Technologies</p>
           <p class="rs-sub">Fredericton, NB</p>
           <p class="rs-date">May 2021 – Present</p>
         </div>
       </article>
       <article class="tl-entry">
-        <div class="tl-content">
-          <h3 class="rs-t">Web Designer</h3>
-        </div>
         <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
-          <h3 class="rs-t">Miscellaneum Studios</h3>
+          <h3 class="rs-t tl-role">Web Designer</h3>
+          <p class="tl-company">Miscellaneum Studios</p>
           <p class="rs-sub">Montréal, QC</p>
           <p class="rs-date">Sep 2020 – Mar 2021</p>
         </div>
       </article>
       <article class="tl-entry">
-        <div class="tl-content">
-          <h3 class="rs-t">Web Designer</h3>
-        </div>
         <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
-          <h3 class="rs-t">Carmel Industries</h3>
+          <h3 class="rs-t tl-role">Web Designer</h3>
+          <p class="tl-company">Carmel Industries</p>
           <p class="rs-sub">Montréal, QC</p>
           <p class="rs-date">May 2020 – Aug 2020</p>
         </div>
       </article>
       <article class="tl-entry">
-        <div class="tl-content">
-          <h3 class="rs-t">Graphic Designer</h3>
-        </div>
         <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32" focusable="false"><circle cx="16" cy="16" r="14.25" fill="#fff" stroke="currentColor" stroke-width="3.5"/><circle cx="16" cy="16" r="8" fill="currentColor"/></svg></span>
         <div class="tl-label">
-          <h3 class="rs-t">Asept-Air Co</h3>
+          <h3 class="rs-t tl-role">Graphic Designer</h3>
+          <p class="tl-company">Asept-Air Co</p>
           <p class="rs-sub">Montréal, QC</p>
           <p class="rs-date">Jan 2020 – Apr 2020</p>
         </div>
